@@ -1,0 +1,27 @@
+#Pony Challenge API
+
+###Help the pony escape the Domokun!
+1. Create your maze API call (dimensions 15 to 25) + valid pony name
+2. Get the maze with the ID from 1: you will get pony (player) location, Domokun (monster) location and maze walls
+3. Move your pony (until you are dead or you reach the end-point)
+(you can also print the maze with the API)
+
+```
+POST /pony-challenge/maze
+create new maze game
+```
+
+```
+GET /pony-challenge/maze/{maze-id}
+get maze current state
+```
+
+```
+POST /pony-challenge/maze/{maze-id}
+make next move in the maze
+```
+
+```
+GET /pony-challenge/maze/{maze-id}/print
+get visual of the current state of the maze
+```
