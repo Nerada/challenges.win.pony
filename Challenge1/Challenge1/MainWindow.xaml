@@ -6,7 +6,71 @@
         xmlns:local="clr-namespace:Challenge1"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <DockPanel>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <TextBlock Name="lblStatus" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"/>
+            </StatusBarItem>
+        </StatusBar>
 
-    </Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Grid.Row="0" Grid.Column="0" Content="Player Name:" Style="{DynamicResource LabelStyle}" />
+            <TextBox x:Name="txtPlayerName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding PlayerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" />
+            <Label Grid.Row="1" Grid.Column="0" Content="Maze size:" Style="{DynamicResource LabelStyle}" />
+            <Label Grid.Row="1" Grid.Column="1" Content="Width" Style="{DynamicResource LabelStyle}" />
+            <TextBox x:Name="txtWidth" Grid.Row="1" Grid.Column="2" Text="{Binding MazeWidth, UpdateSourceTrigger=PropertyChanged}" Width="20">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ValidMazeWidth, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                <Setter Property="BorderBrush" Value="DarkOrange"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Label Grid.Row="1" Grid.Column="3" Content="Height" Style="{DynamicResource LabelStyle}" />
+            <TextBox x:Name="txtHeight" Grid.Row="1" Grid.Column="4" Text="{Binding MazeHeight, UpdateSourceTrigger=PropertyChanged}" Width="20">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ValidMazeHeight, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                <Setter Property="BorderBrush" Value="DarkOrange"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Label Grid.Row="2" Grid.Column="0" Content="Difficulty:" Style="{DynamicResource LabelStyle}" />
+            <TextBox x:Name="txtDifficulty" Grid.Row="2" Grid.Column="1" Text="{Binding MazeDifficulty, UpdateSourceTrigger=PropertyChanged}" Width="20" HorizontalAlignment="Left">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ValidMazeDifficulty, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                <Setter Property="BorderBrush" Value="DarkOrange"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Content="Start" />
+        </Grid>
+    </DockPanel>
 </Window>
