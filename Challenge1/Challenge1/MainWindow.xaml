@@ -4,73 +4,92 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Challenge1"
+        xmlns:l="clr-namespace:Challenge1.Support"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight">
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <TextBlock Name="lblStatus" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Name="lblStatus" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding StatusColor, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" />
             </StatusBarItem>
         </StatusBar>
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="20" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <Label Grid.Row="0" Grid.Column="0" Content="Player Name:" Style="{DynamicResource LabelStyle}" />
-            <TextBox x:Name="txtPlayerName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Text="{Binding PlayerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" />
-            <Label Grid.Row="1" Grid.Column="0" Content="Maze size:" Style="{DynamicResource LabelStyle}" />
-            <Label Grid.Row="1" Grid.Column="1" Content="Width" Style="{DynamicResource LabelStyle}" />
-            <TextBox x:Name="txtWidth" Grid.Row="1" Grid.Column="2" Text="{Binding MazeWidth, UpdateSourceTrigger=PropertyChanged}" Width="20">
+            <TextBox x:Name="txtPlayerName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Text="{Binding PlayerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" />
+            <Label Grid.Row="1" Grid.Column="0" Content="Maze Width:" Style="{DynamicResource LabelStyle}" />
+            <TextBox x:Name="txtWidth" Grid.Row="1" Grid.Column="1" Text="{Binding MazeWidth, UpdateSourceTrigger=PropertyChanged}" Width="20">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ValidMazeWidth, UpdateSourceTrigger=PropertyChanged}" Value="False">
-                                <Setter Property="BorderBrush" Value="DarkOrange"/>
+                                <Setter Property="BorderBrush" Value="DarkOrange" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </TextBox.Style>
             </TextBox>
-            <Label Grid.Row="1" Grid.Column="3" Content="Height" Style="{DynamicResource LabelStyle}" />
-            <TextBox x:Name="txtHeight" Grid.Row="1" Grid.Column="4" Text="{Binding MazeHeight, UpdateSourceTrigger=PropertyChanged}" Width="20">
+            <Label Grid.Row="1" Grid.Column="2" Content="Height:" Style="{DynamicResource LabelStyle}" />
+            <TextBox x:Name="txtHeight" Grid.Row="1" Grid.Column="3" Text="{Binding MazeHeight, UpdateSourceTrigger=PropertyChanged}" Width="20">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ValidMazeHeight, UpdateSourceTrigger=PropertyChanged}" Value="False">
-                                <Setter Property="BorderBrush" Value="DarkOrange"/>
+                                <Setter Property="BorderBrush" Value="DarkOrange" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </TextBox.Style>
             </TextBox>
-            <Label Grid.Row="2" Grid.Column="0" Content="Difficulty:" Style="{DynamicResource LabelStyle}" />
-            <TextBox x:Name="txtDifficulty" Grid.Row="2" Grid.Column="1" Text="{Binding MazeDifficulty, UpdateSourceTrigger=PropertyChanged}" Width="20" HorizontalAlignment="Left">
+            <Label Grid.Row="1" Grid.Column="4" Content="Difficulty:" Style="{DynamicResource LabelStyle}" />
+            <TextBox x:Name="txtDifficulty" Grid.Row="1" Grid.Column="5" Text="{Binding MazeDifficulty, UpdateSourceTrigger=PropertyChanged}" Width="20" HorizontalAlignment="Left">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ValidMazeDifficulty, UpdateSourceTrigger=PropertyChanged}" Value="False">
-                                <Setter Property="BorderBrush" Value="DarkOrange"/>
+                                <Setter Property="BorderBrush" Value="DarkOrange" />
                             </DataTrigger>
-                        </Style.Triggers>
+                        </Style.Triggers> 
                     </Style>
                 </TextBox.Style>
             </TextBox>
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Content="Start" />
+            <Button Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StartGameCommand}" Content="{Binding StartGameButtonContent, UpdateSourceTrigger=PropertyChanged}" />
+
+            <l:LimitChild Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6">
+                <TextBox ScrollViewer.HorizontalScrollBarVisibility="Auto" IsReadOnly="True" Width="247" MinHeight="350" Text="{Binding RestStatus, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Padding="5" />
+            </l:LimitChild>
+ 
+            <TextBlock Grid.Row="0" Grid.Column="6" Grid.RowSpan="5" Background="LightSalmon" Text="{Binding MazeStatus, UpdateSourceTrigger=PropertyChanged}" FontFamily="Courier New" />
         </Grid>
     </DockPanel>
+
+    <Window.InputBindings>
+        <KeyBinding Key="Up" Command="{Binding WalkCommand}" CommandParameter="north" />
+        <KeyBinding Key="W" Command="{Binding WalkCommand}" CommandParameter="north" />
+        <KeyBinding Key="Right" Command="{Binding WalkCommand}" CommandParameter="east" />
+        <KeyBinding Key="D" Command="{Binding WalkCommand}" CommandParameter="east" />
+        <KeyBinding Key="Down" Command="{Binding WalkCommand}" CommandParameter="south" />
+        <KeyBinding Key="S" Command="{Binding WalkCommand}" CommandParameter="south" />
+        <KeyBinding Key="Left" Command="{Binding WalkCommand}" CommandParameter="west" />
+        <KeyBinding Key="A" Command="{Binding WalkCommand}" CommandParameter="west" />
+    </Window.InputBindings>
 </Window>

@@ -1,17 +1,18 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Challenge1
 {
-    class MazeParams
+    internal class MazeParams
     {
         #region Fields
 
-        private int                     m_width;
-        private int                     m_height;
-        private int?                    m_difficulty;
-        private static readonly Random  m_random        = new Random();
+        private int _width = 20;
+        private int _height = 20;
+        private int? _difficulty;
+        private static readonly Random _random = new Random();
 
         // Without google I would'nt have guessed even one of them, at least now the Pony part makes sense.
         // There could be more so lets use this list for random default names.
@@ -26,25 +27,25 @@ namespace Challenge1
         #endregion Fields
 
         #region Properties
-        
+
         public int Width
         {
-            get { return m_width; }
+            get { return _width; }
             set
             {
-                m_width = value;
+                _width = value;
                 if (!IsValidSize(value)) { throw new InvalidInputException("Width is not between 15 and 25."); }
             }
         }
 
         public bool ValidWidth { get { return IsValidSize(Width); } }
-        
-        public int Height      
+
+        public int Height
         {
-            get { return m_height; }
-            set 
+            get { return _height; }
+            set
             {
-                m_height = value;
+                _height = value;
                 if (!IsValidSize(value)) { throw new InvalidInputException("Height is not between 15 and 25."); }
             }
         }
@@ -55,13 +56,13 @@ namespace Challenge1
 
         public int? Difficulty
         {
-            get { return m_difficulty; }
+            get { return _difficulty; }
             set
             {
-                m_difficulty = value;
+                _difficulty = value;
                 if (!IsValidDifficulty(value)) { throw new InvalidInputException("Difficulty is not between 0 and 10."); }
             }
-        } 
+        }
 
         public bool ValidDifficulty { get { return IsValidDifficulty(Difficulty); } }
 
@@ -71,14 +72,14 @@ namespace Challenge1
 
         public static string GetRandomVerifiedPlayerName()
         {
-            return ConfirmedNames[m_random.Next(0, ConfirmedNames.Count - 1)];
+            return ConfirmedNames[_random.Next(0, ConfirmedNames.Count - 1)];
         }
 
         public bool IsValid()
         {
-            if (!IsValidSize(m_width)) { throw new InvalidInputException("Width is not between 15 and 25."); }
-            if (!IsValidSize(m_height)) { throw new InvalidInputException("Height is not between 15 and 25."); }
-            if (!IsValidDifficulty(m_difficulty)) { throw new InvalidInputException("Difficulty is not between 0 and 10."); }
+            if (!IsValidSize(_width)) { throw new InvalidInputException("Width is not between 15 and 25."); }
+            if (!IsValidSize(_height)) { throw new InvalidInputException("Height is not between 15 and 25."); }
+            if (!IsValidDifficulty(_difficulty)) { throw new InvalidInputException("Difficulty is not between 0 and 10."); }
             return true;
         }
 
@@ -87,9 +88,19 @@ namespace Challenge1
             return (size >= 15 && size <= 25);
         }
 
-        private bool IsValidDifficulty (int? dif)
+        private bool IsValidDifficulty(int? dif)
         {
             return (dif == null || (dif >= 0 && dif <= 10));
+        }
+
+        public JObject ToJson()
+        {
+            JObject returnJSON = new JObject(
+                new JProperty("maze-width", Width),
+                new JProperty("maze-height", Height),
+                new JProperty("maze-player-name", PlayerName));
+            if (Difficulty != null) { returnJSON.Add("difficulty", Difficulty); }
+            return returnJSON;
         }
 
         #endregion Functions
