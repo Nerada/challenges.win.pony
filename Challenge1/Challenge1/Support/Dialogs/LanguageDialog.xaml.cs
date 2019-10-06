@@ -11,6 +11,7 @@ namespace Challenge1.Support.Dialogs
         public LanguageDialog()
         {
             InitializeComponent();
+            Closing += new System.ComponentModel.CancelEventHandler(Window_Closing);
         }
 
         private void EnglishButton_Click(object sender, RoutedEventArgs e)
@@ -32,6 +33,11 @@ namespace Challenge1.Support.Dialogs
             ResourceHandler.SetLanguage(ResourceHandler.Language.Chinese);
             DialogResult = true;
             Close();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            DialogResult = true;
         }
     }
 }

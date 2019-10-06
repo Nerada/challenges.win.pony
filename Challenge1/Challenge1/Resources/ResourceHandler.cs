@@ -23,7 +23,7 @@ namespace Challenge1.Resources
 
         static ResourceHandler()
         {
-            SetLanguage(Language.Chinese);
+            SetLanguage(Language.English);
         }
 
         public static Dictionary<Language, string> Languages { get; } = new Dictionary<Language, string>()

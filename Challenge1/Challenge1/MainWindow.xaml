@@ -77,7 +77,7 @@
             <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StartGameCommand}" Content="{Binding StartGameButtonContent, UpdateSourceTrigger=PropertyChanged}" />
 
             <l:LimitChild Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6">
-                <TextBox Background="Red" ScrollViewer.HorizontalScrollBarVisibility="Auto" IsReadOnly="True" MinWidth="247" MinHeight="350" Text="{Binding RestStatus, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Padding="5" Focusable="False" BorderThickness="0" HorizontalAlignment="Left"/>
+                <TextBox ScrollViewer.HorizontalScrollBarVisibility="Auto" IsReadOnly="True" MinWidth="247" MinHeight="350" Text="{Binding RestStatus, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Padding="5" Focusable="False" BorderThickness="0" HorizontalAlignment="Left"/>
             </l:LimitChild>
  
             <TextBlock Grid.Row="0" Grid.Column="6" Grid.RowSpan="6" Background="LightSalmon" Text="{Binding MazeStatus, UpdateSourceTrigger=PropertyChanged}" FontFamily="Courier New" />
