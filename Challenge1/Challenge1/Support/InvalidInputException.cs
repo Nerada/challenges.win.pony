@@ -2,7 +2,7 @@
 
 namespace Challenge1
 {
-    internal class InvalidInputException : Exception
+    public class InvalidInputException : Exception
     {
         public InvalidInputException()
         {

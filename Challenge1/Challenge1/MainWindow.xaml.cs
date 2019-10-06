@@ -39,7 +39,7 @@ namespace Challenge1
         {
             TextBox tb = (TextBox)sender;
 
-            if (tb.Text != string.Empty)
+            if (!string.IsNullOrEmpty(tb.Text))
             {
                 _previousValues[tb].Text = tb.Text;
                 _previousValues[tb].Color = tb.Foreground;
@@ -53,9 +53,9 @@ namespace Challenge1
         {
             TextBox tb = (TextBox)sender;
 
-            if (tb.Text.Trim() != string.Empty) { return; }
+            if (!string.IsNullOrEmpty(tb.Text.Trim())) { return; }
             // Lets get a new random player name just for fun
-            if (tb == txtPlayerName) { tb.Text = _viewModel.RandomPlayer; }
+            if (tb == txtPlayerName) { tb.Text = MainWindowViewModel.RandomPlayer; }
             else { tb.Text = _previousValues[tb].Text; }
             tb.Foreground = _previousValues[tb].Color;
         }

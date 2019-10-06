@@ -1,10 +1,15 @@
-﻿using Newtonsoft.Json;
+﻿using Challenge1.Resources;
+
 using Newtonsoft.Json.Linq;
+
 using System;
 using System.Collections.Generic;
 
 namespace Challenge1
 {
+    /// <summary>
+    /// Data model + validation for Maze parameters.
+    /// </summary>
     internal class MazeParams
     {
         #region Fields
@@ -34,10 +39,10 @@ namespace Challenge1
             set
             {
                 _width = value;
-                if (!IsValidSize(value)) { throw new InvalidInputException("Width is not between 15 and 25."); }
+                if (!IsValidSize(value)) { throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_width")); }
             }
         }
-
+         
         public bool ValidWidth { get { return IsValidSize(Width); } }
 
         public int Height
@@ -46,7 +51,7 @@ namespace Challenge1
             set
             {
                 _height = value;
-                if (!IsValidSize(value)) { throw new InvalidInputException("Height is not between 15 and 25."); }
+                if (!IsValidSize(value)) { throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_height")); }
             }
         }
 
@@ -60,7 +65,7 @@ namespace Challenge1
             set
             {
                 _difficulty = value;
-                if (!IsValidDifficulty(value)) { throw new InvalidInputException("Difficulty is not between 0 and 10."); }
+                if (!IsValidDifficulty(value)) { throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_difficulty")); }
             }
         }
 
@@ -77,18 +82,18 @@ namespace Challenge1
 
         public bool IsValid()
         {
-            if (!IsValidSize(_width)) { throw new InvalidInputException("Width is not between 15 and 25."); }
-            if (!IsValidSize(_height)) { throw new InvalidInputException("Height is not between 15 and 25."); }
-            if (!IsValidDifficulty(_difficulty)) { throw new InvalidInputException("Difficulty is not between 0 and 10."); }
+            if (!IsValidSize(_width)) { throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_width")); }
+            if (!IsValidSize(_height)) { throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_height")); }
+            if (!IsValidDifficulty(_difficulty)) { throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_difficulty")); }
             return true;
         }
 
-        private bool IsValidSize(int size)
+        private static bool IsValidSize(int size)
         {
             return (size >= 15 && size <= 25);
         }
 
-        private bool IsValidDifficulty(int? dif)
+        private static bool IsValidDifficulty(int? dif)
         {
             return (dif == null || (dif >= 0 && dif <= 10));
         }
