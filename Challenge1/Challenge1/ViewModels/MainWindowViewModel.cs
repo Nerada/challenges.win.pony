@@ -59,6 +59,7 @@ namespace Challenge1.ViewModels
             set
             {
                 _mazeParams.PlayerName = value;
+                ValidPlayerName = true;
                 OnPropertyChange(nameof(PlayerName));
             }
         }
@@ -239,7 +240,6 @@ namespace Challenge1.ViewModels
                 JObject requestPayload = _mazeParams.ToJson();
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_creating_maze"), requestPayload.ToString());
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_created_maze"), _restAnalyzer.CreateMaze(requestPayload));
-                ValidPlayerName = true;
 
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_get_maze"));
                 MazeStatus = _restAnalyzer. RetrieveMaze();
@@ -249,9 +249,10 @@ namespace Challenge1.ViewModels
                 StartGameButtonContent = ResourceHandler.GetString("MainWindowViewModel_button_new_game");
                 SetStatus(StatusType.Info, ResourceHandler.GetString("MainWindowViewModel_info_ready_game"));
             }
-            catch (InvalidPlayerNameException)
+            catch (InvalidPlayerNameException e)
             {
                 ValidPlayerName = false;
+                SetStatus(StatusType.Error, e.Message);
             }
             catch (Exception e)
             {

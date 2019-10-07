@@ -60,7 +60,7 @@ namespace Challenge1.Rest
                 }
             }
             catch (WebException e)
-             {
+            {
                 var resp = new StreamReader(e.Response.GetResponseStream());
                 string messageFromServer = resp.ReadToEnd();
                 resp.Close();

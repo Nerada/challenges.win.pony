@@ -1,7 +1,9 @@
 ﻿using Challenge1.Models;
+using Challenge1.Support;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Net;
 using System.Text;
 
 namespace Challenge1.Rest
@@ -15,7 +17,20 @@ namespace Challenge1.Rest
 
         public string CreateMaze(JObject payload)
         {
-            return JObject.Parse(_restHandler.Request(RestHandler.Actions.CreateMaze, payload)).ToString();
+            try
+            {
+                string response = _restHandler.Request(RestHandler.Actions.CreateMaze, payload);
+                JObject createReturn = JObject.Parse(response);
+                return createReturn.ToString();
+            }
+            catch (WebException e)
+            {
+                if (e.Message == "Only ponies can play")
+                {
+                    throw new InvalidPlayerNameException(e.Message);
+                }
+                throw new WebException(e.Message);
+            }
         }
 
         public string RetrieveMaze()

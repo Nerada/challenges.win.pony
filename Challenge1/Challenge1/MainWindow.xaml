@@ -19,8 +19,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
                 <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
-                <RowDefinition Height="10" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="0" />
                 <RowDefinition Height="40" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -35,7 +35,17 @@
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="{Binding LabelPlayerName, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource LabelStyle}" />
-            <TextBox x:Name="txtPlayerName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Text="{Binding PlayerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" Margin="0,0,6,0" />
+            <TextBox x:Name="txtPlayerName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" Text="{Binding PlayerName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" Margin="0,0,6,0">
+                <TextBox.Style>
+                    <Style TargetType="TextBox">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ValidPlayerName, UpdateSourceTrigger=PropertyChanged}" Value="False">
+                                <Setter Property="BorderBrush" Value="Red" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBox.Style>
+            </TextBox>
 
             <Label Grid.Row="1" Grid.Column="0" Content="{Binding LabelMazeWidth, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource LabelStyle}" />
             <TextBox x:Name="txtWidth" Grid.Row="1" Grid.Column="1" Text="{Binding MazeWidth, UpdateSourceTrigger=PropertyChanged}" Width="20">
@@ -43,7 +53,7 @@
                     <Style TargetType="TextBox">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ValidMazeWidth, UpdateSourceTrigger=PropertyChanged}" Value="False">
-                                <Setter Property="BorderBrush" Value="DarkOrange" />
+                                <Setter Property="BorderBrush" Value="Red" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -55,7 +65,7 @@
                     <Style TargetType="TextBox">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ValidMazeHeight, UpdateSourceTrigger=PropertyChanged}" Value="False">
-                                <Setter Property="BorderBrush" Value="DarkOrange" />
+                                <Setter Property="BorderBrush" Value="Red" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
@@ -67,17 +77,19 @@
                     <Style TargetType="TextBox">
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding ValidMazeDifficulty, UpdateSourceTrigger=PropertyChanged}" Value="False">
-                                <Setter Property="BorderBrush" Value="DarkOrange" />
+                                <Setter Property="BorderBrush" Value="Red" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </TextBox.Style>
             </TextBox>
 
+            <TextBox Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="6" IsReadOnly="True" BorderThickness="0" Cursor="Arrow"/>
+
             <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StartGameCommand}" Content="{Binding StartGameButtonContent, UpdateSourceTrigger=PropertyChanged}" />
 
             <l:LimitChild Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6">
-                <TextBox ScrollViewer.HorizontalScrollBarVisibility="Visible" IsReadOnly="True" MinWidth="247" MinHeight="350" Text="{Binding RestStatus, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Padding="5" BorderThickness="0" HorizontalAlignment="Left">
+                <TextBox ScrollViewer.HorizontalScrollBarVisibility ="Visible" IsReadOnly="True" MinWidth="247" MinHeight="350" Text="{Binding RestStatus, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Padding="5" BorderThickness="0" HorizontalAlignment="Left">
                     <TextBox.InputBindings>
                         <KeyBinding Key="Up" Command="{Binding WalkCommand}" CommandParameter="north" />
                         <KeyBinding Key="W" Command="{Binding WalkCommand}" CommandParameter="north" />
@@ -105,15 +117,4 @@
             </TextBlock>
         </Grid>
     </DockPanel>
-
-    <Window.InputBindings>
-        <KeyBinding Key="Up" Command="{Binding WalkCommand}" CommandParameter="north" />
-        <KeyBinding Key="W" Command="{Binding WalkCommand}" CommandParameter="north" />
-        <KeyBinding Key="Right" Command="{Binding WalkCommand}" CommandParameter="east" />
-        <KeyBinding Key="D" Command="{Binding WalkCommand}" CommandParameter="east" />
-        <KeyBinding Key="Down" Command="{Binding WalkCommand}" CommandParameter="south" />
-        <KeyBinding Key="S" Command="{Binding WalkCommand}" CommandParameter="south" />
-        <KeyBinding Key="Left" Command="{Binding WalkCommand}" CommandParameter="west" />
-        <KeyBinding Key="A" Command="{Binding WalkCommand}" CommandParameter="west" />
-    </Window.InputBindings>
 </Window>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Challenge1
@@ -56,9 +57,16 @@ namespace Challenge1
 
             if (!string.IsNullOrEmpty(tb.Text.Trim())) { return; }
             // Lets get a new random player name just for fun
-            if (tb == txtPlayerName) { tb.Text = MainWindowViewModel.RandomPlayer; }
-            else { tb.Text = _previousValues[tb].Text; }
-            tb.Foreground = _previousValues[tb].Color;
+            if (tb == txtPlayerName)
+            {
+                tb.Text = MainWindowViewModel.RandomPlayer;
+                tb.Foreground = _gray;
+            }
+            else
+            {
+                tb.Text = _previousValues[tb].Text;
+                tb.Foreground = _previousValues[tb].Color;
+            }
         }
 
         private class PreviousState
