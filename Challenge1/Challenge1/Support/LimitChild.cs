@@ -5,7 +5,7 @@ namespace Challenge1.Support
     /// <summary>
     /// https://stackoverflow.com/questions/21255551/wpf-how-to-make-a-textbox-dynamically-sized-yet-prevent-autosizing
     /// </summary>
-    class LimitChild : System.Windows.Controls.Panel
+    internal class LimitChild : System.Windows.Controls.Panel
     {
         public LimitChild()
         {
@@ -23,8 +23,8 @@ namespace Challenge1.Support
 
             child.Measure(panelDesiredSize);
 
-            // IMPORTANT: do not allow PositiveInfinity to be returned, that will raise an exception in the caller! 
-            // PositiveInfinity might be an availableSize input; this means that the parent does not care about sizing 
+            // IMPORTANT: do not allow PositiveInfinity to be returned, that will raise an exception in the caller!
+            // PositiveInfinity might be an availableSize input; this means that the parent does not care about sizing
             return panelDesiredSize;
         }
 

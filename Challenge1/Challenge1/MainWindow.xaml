@@ -7,11 +7,11 @@
         mc:Ignorable="d"
         Title="{Binding WindowTitle, UpdateSourceTrigger=PropertyChanged}"
         ResizeMode="NoResize"
-        SizeToContent="WidthAndHeight">  
+        SizeToContent="WidthAndHeight">
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <TextBlock Name="lblStatus" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding StatusColor, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold" />
+                <TextBox Name="lblStatus" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}" Foreground="{Binding StatusColor, UpdateSourceTrigger=PropertyChanged}" Background="Transparent" FontWeight="Bold" IsReadOnly="True" BorderThickness="0" />
             </StatusBarItem>
         </StatusBar>
 
@@ -69,22 +69,44 @@
                             <DataTrigger Binding="{Binding ValidMazeDifficulty, UpdateSourceTrigger=PropertyChanged}" Value="False">
                                 <Setter Property="BorderBrush" Value="DarkOrange" />
                             </DataTrigger>
-                        </Style.Triggers> 
+                        </Style.Triggers>
                     </Style>
                 </TextBox.Style>
             </TextBox>
-            
+
             <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StartGameCommand}" Content="{Binding StartGameButtonContent, UpdateSourceTrigger=PropertyChanged}" />
 
             <l:LimitChild Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6">
-                <TextBox ScrollViewer.HorizontalScrollBarVisibility="Auto" IsReadOnly="True" MinWidth="247" MinHeight="350" Text="{Binding RestStatus, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Padding="5" Focusable="False" BorderThickness="0" HorizontalAlignment="Left"/>
+                <TextBox ScrollViewer.HorizontalScrollBarVisibility="Visible" IsReadOnly="True" MinWidth="247" MinHeight="350" Text="{Binding RestStatus, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Padding="5" BorderThickness="0" HorizontalAlignment="Left">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Up" Command="{Binding WalkCommand}" CommandParameter="north" />
+                        <KeyBinding Key="W" Command="{Binding WalkCommand}" CommandParameter="north" />
+                        <KeyBinding Key="Right" Command="{Binding WalkCommand}" CommandParameter="east" />
+                        <KeyBinding Key="D" Command="{Binding WalkCommand}" CommandParameter="east" />
+                        <KeyBinding Key="Down" Command="{Binding WalkCommand}" CommandParameter="south" />
+                        <KeyBinding Key="S" Command="{Binding WalkCommand}" CommandParameter="south" />
+                        <KeyBinding Key="Left" Command="{Binding WalkCommand}" CommandParameter="west" />
+                        <KeyBinding Key="A" Command="{Binding WalkCommand}" CommandParameter="west" />
+                    </TextBox.InputBindings>
+                </TextBox>
             </l:LimitChild>
- 
-            <TextBlock Grid.Row="0" Grid.Column="6" Grid.RowSpan="6" Background="LightSalmon" Text="{Binding MazeStatus, UpdateSourceTrigger=PropertyChanged}" FontFamily="Courier New" />
+
+            <TextBlock Grid.Row="0" Grid.Column="6" Grid.RowSpan="6" Background="LightSalmon" Text="{Binding MazeStatus, UpdateSourceTrigger=PropertyChanged}" FontFamily="Courier New">
+                <TextBlock.InputBindings>
+                    <KeyBinding Key="Up" Command="{Binding WalkCommand}" CommandParameter="north" />
+                    <KeyBinding Key="W" Command="{Binding WalkCommand}" CommandParameter="north" />
+                    <KeyBinding Key="Right" Command="{Binding WalkCommand}" CommandParameter="east" />
+                    <KeyBinding Key="D" Command="{Binding WalkCommand}" CommandParameter="east" />
+                    <KeyBinding Key="Down" Command="{Binding WalkCommand}" CommandParameter="south" />
+                    <KeyBinding Key="S" Command="{Binding WalkCommand}" CommandParameter="south" />
+                    <KeyBinding Key="Left" Command="{Binding WalkCommand}" CommandParameter="west" />
+                    <KeyBinding Key="A" Command="{Binding WalkCommand}" CommandParameter="west" />
+                </TextBlock.InputBindings>
+            </TextBlock>
         </Grid>
     </DockPanel>
 
-    <Window.InputBindings> 
+    <Window.InputBindings>
         <KeyBinding Key="Up" Command="{Binding WalkCommand}" CommandParameter="north" />
         <KeyBinding Key="W" Command="{Binding WalkCommand}" CommandParameter="north" />
         <KeyBinding Key="Right" Command="{Binding WalkCommand}" CommandParameter="east" />

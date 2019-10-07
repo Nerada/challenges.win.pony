@@ -1,5 +1,6 @@
 ﻿using Challenge1.Models;
 using Challenge1.Resources;
+using Challenge1.Rest;
 using Challenge1.Support;
 
 using Newtonsoft.Json.Linq;
@@ -12,13 +13,14 @@ using System.Reflection;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Challenge1
+namespace Challenge1.ViewModels
 {
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         #region Fields
 
         private MazeParams _mazeParams = new MazeParams();
+        private RestAnalyzer _restAnalyzer = new RestAnalyzer();
 
         private ICommand _clickCommand;
         private ICommand _walkCommand;
@@ -30,8 +32,7 @@ namespace Challenge1
 
         private bool _validPlayerName = true;
 
-        private RestHandler _restHandler = new RestHandler();
-        private string _startGameButtonContent = ResourceHandler.GetString("MainWindowViewModel_button_start_game") ;
+        private string _startGameButtonContent = ResourceHandler.GetString("MainWindowViewModel_button_start_game");
 
         private enum StatusType { Info, Warning, Error }
 
@@ -54,13 +55,13 @@ namespace Challenge1
 
         public string PlayerName
         {
-            get { return _mazeParams.PlayerName; }   
+            get { return _mazeParams.PlayerName; }
             set
             {
                 _mazeParams.PlayerName = value;
                 OnPropertyChange(nameof(PlayerName));
             }
-        } 
+        }
 
         public bool ValidPlayerName
         {
@@ -165,8 +166,8 @@ namespace Challenge1
 
         public Brush StatusColor { get; set; }
 
-        public string RestStatus 
-        { 
+        public string RestStatus
+        {
             get { return _restStatus; }
             private set
             {
@@ -185,9 +186,9 @@ namespace Challenge1
             }
         }
 
-        public string StartGameButtonContent 
-        { 
-            get { return _startGameButtonContent; } 
+        public string StartGameButtonContent
+        {
+            get { return _startGameButtonContent; }
             set
             {
                 _startGameButtonContent = value;
@@ -212,7 +213,7 @@ namespace Challenge1
                     return false;
                 }
             }
-        } 
+        }
 
         public ICommand WalkCommand => _walkCommand ?? (_walkCommand = new CommandHandler(param => WalkCmd(param), () => CanExecuteWalk));
         private bool CanExecuteWalk { get; set; }
@@ -237,11 +238,12 @@ namespace Challenge1
                 SetStatus(StatusType.Info, ResourceHandler.GetString("MainWindowViewModel_info_setting_game"));
                 JObject requestPayload = _mazeParams.ToJson();
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_creating_maze"), requestPayload.ToString());
-                LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_created_maze"), _restHandler.Request(RestHandler.Actions.CreateMaze, requestPayload));
+                LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_created_maze"), _restAnalyzer.CreateMaze(requestPayload));
                 ValidPlayerName = true;
 
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_get_maze"));
-                MazeStatus = _restHandler.Request(RestHandler.Actions.GetMaze);
+                MazeStatus = _restAnalyzer. RetrieveMaze();
+
                 CanExecuteWalk = true;
 
                 StartGameButtonContent = ResourceHandler.GetString("MainWindowViewModel_button_new_game");
@@ -265,14 +267,12 @@ namespace Challenge1
 
             try
             {
-                JObject direction = new JObject();
-                direction.Add("direction", (string)param);
-                LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_walk_direction"), direction.ToString());
+                LogRestInfo($"{ResourceHandler.GetString("MainWindowViewModel_rest_walk_direction")} {(string)param}");
 
-                SetStatus(StatusType.Info, _restHandler.Request(RestHandler.Actions.NextMove, direction));
+                SetStatus(StatusType.Info, _restAnalyzer.Move((string)param));
 
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_updating_maze"));
-                MazeStatus = _restHandler.Request(RestHandler.Actions.GetMaze);
+                MazeStatus = _restAnalyzer.RetrieveMaze();
             }
             catch (Exception e)
             {
@@ -285,14 +285,14 @@ namespace Challenge1
 
         private void ChangeLanguageCmd(object language)
         {
-            if(Enum.TryParse((string)language, out ResourceHandler.Language selectedLanguage))
+            if (Enum.TryParse((string)language, out ResourceHandler.Language selectedLanguage))
             {
                 ResourceHandler.SetLanguage(selectedLanguage);
 
                 List<PropertyInfo> properties = new List<PropertyInfo>(typeof(MainWindowViewModel).GetProperties());
                 properties.ForEach(p => OnPropertyChange(nameof(p)));
-            }  
-        }  
+            }
+        }
 
         private void SetStatus(StatusType type, string message)
         {
@@ -303,7 +303,7 @@ namespace Challenge1
         private void LogRestInfo(string action, string body = "")
         {
             string actionEnding = !string.IsNullOrEmpty(body) ? $": {Environment.NewLine}{body}" : ".";
-            RestStatus = $"{DateTime.Now.ToString("HH:mm:ss", CultureInfo.InvariantCulture)} {action}{actionEnding}{Environment.NewLine}{Environment.NewLine}" + RestStatus;
+            RestStatus = $"{DateTime.Now.ToString("HH:mm:ss", CultureInfo.InvariantCulture)} {action}{actionEnding}{Environment.NewLine}" + RestStatus;
         }
 
         #endregion Functions

@@ -1,11 +1,11 @@
 ﻿using Challenge1.Resources;
-
+using Challenge1.Support;
 using Newtonsoft.Json.Linq;
 
 using System;
 using System.Collections.Generic;
 
-namespace Challenge1
+namespace Challenge1.Models
 {
     /// <summary>
     /// Data model + validation for Maze parameters.
@@ -42,7 +42,7 @@ namespace Challenge1
                 if (!IsValidSize(value)) { throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_width")); }
             }
         }
-         
+
         public bool ValidWidth { get { return IsValidSize(Width); } }
 
         public int Height

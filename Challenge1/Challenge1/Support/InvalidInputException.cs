@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Challenge1
+namespace Challenge1.Support
 {
     public class InvalidInputException : Exception
     {

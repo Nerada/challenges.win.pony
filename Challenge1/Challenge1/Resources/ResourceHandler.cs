@@ -31,11 +31,10 @@ namespace Challenge1.Resources
             { Language.English, "en-US" },
             { Language.Dutch, "nl-NL" },
             { Language.Chinese, "zh-cn" }
-
         };
 
         /// <summary>
-        /// Get a specific resource string for the current language  
+        /// Get a specific resource string for the current language
         /// </summary>
         /// <param name="resName"></param>
         /// <returns></returns>

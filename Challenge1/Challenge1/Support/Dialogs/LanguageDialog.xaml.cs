@@ -1,4 +1,5 @@
 ﻿using Challenge1.Resources;
+
 using System.Windows;
 
 namespace Challenge1.Support.Dialogs
