@@ -62,7 +62,7 @@ namespace Challenge1
                 tb.Text = MainWindowViewModel.RandomPlayer;
                 tb.Foreground = _gray;
             }
-            else
+            else if (tb != txtDifficulty)
             {
                 tb.Text = _previousValues[tb].Text;
                 tb.Foreground = _previousValues[tb].Color;

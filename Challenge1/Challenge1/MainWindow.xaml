@@ -48,7 +48,7 @@
             </TextBox>
 
             <Label Grid.Row="1" Grid.Column="0" Content="{Binding LabelMazeWidth, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource LabelStyle}" />
-            <TextBox x:Name="txtWidth" Grid.Row="1" Grid.Column="1" Text="{Binding MazeWidth, UpdateSourceTrigger=PropertyChanged}" Width="20">
+            <TextBox x:Name="txtWidth" Grid.Row="1" Grid.Column="1" Text="{Binding MazeWidth, UpdateSourceTrigger=PropertyChanged}" Width="20" Validation.ErrorTemplate="{x:Null}">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>
@@ -60,7 +60,7 @@
                 </TextBox.Style>
             </TextBox>
             <Label Grid.Row="1" Grid.Column="2" Content="{Binding LabelMazeHeight, UpdateSourceTrigger=PropertyChanged}" Style="{DynamicResource LabelStyle}" />
-            <TextBox x:Name="txtHeight" Grid.Row="1" Grid.Column="3" Text="{Binding MazeHeight, UpdateSourceTrigger=PropertyChanged}" Width="20">
+            <TextBox x:Name="txtHeight" Grid.Row="1" Grid.Column="3" Text="{Binding MazeHeight, UpdateSourceTrigger=PropertyChanged}" Width="20" Validation.ErrorTemplate="{x:Null}">
                 <TextBox.Style>
                     <Style TargetType="TextBox">
                         <Style.Triggers>
