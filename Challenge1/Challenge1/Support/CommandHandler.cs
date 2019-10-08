@@ -9,8 +9,8 @@ namespace Challenge1.Support
     /// </summary>
     public class CommandHandler : ICommand
     {
-        private Action<object> _action;
-        private Func<bool> _canExecute;
+        private readonly Action<object> _action;
+        private readonly Func<bool> _canExecute;
 
         /// <summary>
         /// Creates instance of the command handler

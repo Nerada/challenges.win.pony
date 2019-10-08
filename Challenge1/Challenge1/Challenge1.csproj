@@ -4,6 +4,11 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Authors>Ramon Bollen</Authors>
+    <Company>RamBo</Company>
+    <Description />
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageReleaseNotes />
   </PropertyGroup>
 
   <ItemGroup>

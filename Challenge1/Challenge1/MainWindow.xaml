@@ -84,12 +84,12 @@
                 </TextBox.Style>
             </TextBox>
 
-            <TextBox Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="6" IsReadOnly="True" BorderThickness="0" Cursor="Arrow"/>
+            <TextBox Grid.Row="2" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="6" IsReadOnly="True" BorderThickness="0" Cursor="Arrow" />
 
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StartGameCommand}" Content="{Binding StartGameButtonContent, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Command="{Binding StartGameCommand}" Content="{Binding StartGameButtonContent, UpdateSourceTrigger=PropertyChanged}" Click="Button_Click" />
 
             <l:LimitChild Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6">
-                <TextBox ScrollViewer.HorizontalScrollBarVisibility ="Visible" IsReadOnly="True" MinWidth="247" MinHeight="350" Text="{Binding RestStatus, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Padding="5" BorderThickness="0" HorizontalAlignment="Left">
+                <TextBox x:Name="txtRestInfo" ScrollViewer.HorizontalScrollBarVisibility ="Visible" IsReadOnly="True" MinWidth="247" MinHeight="350" Text="{Binding RestStatus, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" TextWrapping="Wrap" Padding="5" BorderThickness="0" HorizontalAlignment="Left">
                     <TextBox.InputBindings>
                         <KeyBinding Key="Up" Command="{Binding WalkCommand}" CommandParameter="north" />
                         <KeyBinding Key="W" Command="{Binding WalkCommand}" CommandParameter="north" />
@@ -103,7 +103,7 @@
                 </TextBox>
             </l:LimitChild>
 
-            <TextBlock Grid.Row="0" Grid.Column="6" Grid.RowSpan="6" Background="LightSalmon" Text="{Binding MazeStatus, UpdateSourceTrigger=PropertyChanged}" FontFamily="Courier New">
+            <TextBlock x:Name="txtMaze" Grid.Row="0" Grid.Column="6" Grid.RowSpan="6" Background="LightSalmon" Text="{Binding MazeStatus, UpdateSourceTrigger=PropertyChanged}" FontFamily="Courier New">
                 <TextBlock.InputBindings>
                     <KeyBinding Key="Up" Command="{Binding WalkCommand}" CommandParameter="north" />
                     <KeyBinding Key="W" Command="{Binding WalkCommand}" CommandParameter="north" />

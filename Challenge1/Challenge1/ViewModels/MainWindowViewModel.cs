@@ -19,8 +19,8 @@ namespace Challenge1.ViewModels
     {
         #region Fields
 
-        private MazeParams _mazeParams = new MazeParams();
-        private RestAnalyzer _restAnalyzer = new RestAnalyzer();
+        private readonly MazeParams _mazeParams = new MazeParams();
+        private readonly RestAnalyzer _restAnalyzer = new RestAnalyzer();
 
         private ICommand _clickCommand;
         private ICommand _walkCommand;
@@ -36,7 +36,7 @@ namespace Challenge1.ViewModels
 
         private enum StatusType { Info, Warning, Error }
 
-        private Dictionary<StatusType, Brush> _statusColor = new Dictionary<StatusType, Brush>()
+        private readonly Dictionary<StatusType, Brush> _statusColor = new Dictionary<StatusType, Brush>()
         {
             { StatusType.Info, new SolidColorBrush(Colors.Black) },
             { StatusType.Warning, new SolidColorBrush(Colors.DarkOrange) },
@@ -242,7 +242,7 @@ namespace Challenge1.ViewModels
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_created_maze"), _restAnalyzer.CreateMaze(requestPayload));
 
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_get_maze"));
-                MazeStatus = _restAnalyzer. RetrieveMaze();
+                MazeStatus = _restAnalyzer.RetrieveMaze();
 
                 CanExecuteWalk = true;
 

@@ -1,5 +1,6 @@
 ﻿using Challenge1.Resources;
 using Challenge1.Support;
+
 using Newtonsoft.Json.Linq;
 
 using System;
@@ -10,7 +11,7 @@ namespace Challenge1.Models
     /// <summary>
     /// Data model + validation for Maze parameters.
     /// </summary>
-    internal class MazeParams
+    public class MazeParams
     {
         #region Fields
 
@@ -19,19 +20,19 @@ namespace Challenge1.Models
         private int? _difficulty;
         private static readonly Random _random = new Random();
 
-        // Without google I would'nt have guessed even one of them, at least now the Pony part makes sense.
+        #endregion Fields
+
+        #region Properties
+
+        // Without google I would'nt have guessed any of them.
         // There could be more so lets use this list for random default names.
         // Too bad there is no "get valid name list" or "validate name" call to tbe API.
-        public static List<string> ConfirmedNames = new List<string>()
+        public static List<string> ConfirmedNames => new List<string>()
         {
             "Apple Bloom", "Applejack", "Big McIntosh", "Derpy Hooves", "Fluttershy", "Pinkie Pie",
             "Princess Celestia", "Princess Luna", "Rainbow Dash", "Rarity", "Spike", "Sweetie Belle",
             "Twilight Sparkle"
         };
-
-        #endregion Fields
-
-        #region Properties
 
         public int Width
         {

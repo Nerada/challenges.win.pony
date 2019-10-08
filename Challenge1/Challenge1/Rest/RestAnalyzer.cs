@@ -1,7 +1,7 @@
-﻿using Challenge1.Models;
-using Challenge1.Support;
-using Newtonsoft.Json;
+﻿using Challenge1.Support;
+
 using Newtonsoft.Json.Linq;
+
 using System;
 using System.Net;
 using System.Text;
@@ -11,9 +11,9 @@ namespace Challenge1.Rest
     /// <summary>
     /// Class for calling and analyzing Rest
     /// </summary>
-    internal class RestAnalyzer
+    public class RestAnalyzer
     {
-        private RestHandler _restHandler = new RestHandler();
+        private readonly RestHandler _restHandler = new RestHandler();
 
         public string CreateMaze(JObject payload)
         {
@@ -40,8 +40,10 @@ namespace Challenge1.Rest
 
         public string Move(string direction)
         {
-            JObject directionPayload = new JObject();
-            directionPayload.Add("direction", direction);
+            JObject directionPayload = new JObject()
+            {
+                { "direction", direction }
+            };
 
             string response = _restHandler.Request(RestHandler.Actions.NextMove, directionPayload);
 
@@ -57,14 +59,14 @@ namespace Challenge1.Rest
                     byte[] data = Convert.FromBase64String(fileName);
                     string decodedString = Encoding.UTF8.GetString(data);
 
-                    string image = "/"+decodedString+".jpg";
+                    string image = "/" + decodedString + ".jpg";
 
                     return image;
                 }
 
                 return JObject.Parse(response).SelectToken("state-result").ToString();
             }
-            catch 
+            catch
             {
                 throw new Exception();
             }

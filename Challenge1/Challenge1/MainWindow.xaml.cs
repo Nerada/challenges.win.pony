@@ -1,9 +1,9 @@
 ﻿using Challenge1.ViewModels;
+
 using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Challenge1
@@ -14,11 +14,11 @@ namespace Challenge1
     public partial class MainWindow : Window
     {
         private readonly MainWindowViewModel _viewModel;
-        private SolidColorBrush _black = new SolidColorBrush(Colors.Black);
-        private SolidColorBrush _gray = new SolidColorBrush(Colors.Gray);
+        private readonly SolidColorBrush _black = new SolidColorBrush(Colors.Black);
+        private readonly SolidColorBrush _gray = new SolidColorBrush(Colors.Gray);
 
-        private Dictionary<TextBox, PreviousState> _previousValues = new Dictionary<TextBox, PreviousState>();
-        private List<TextBox> _textboxes;
+        private readonly Dictionary<TextBox, PreviousState> _previousValues = new Dictionary<TextBox, PreviousState>();
+        private readonly List<TextBox> _textboxes;
 
         public MainWindow()
         {
@@ -73,6 +73,11 @@ namespace Challenge1
         {
             public string Text { get; set; }
             public Brush Color { get; set; } = new SolidColorBrush(Colors.Gray);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            txtRestInfo.Focus();
         }
     }
 }

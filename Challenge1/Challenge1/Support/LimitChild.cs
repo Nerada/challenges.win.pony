@@ -1,11 +1,12 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace Challenge1.Support
 {
     /// <summary>
     /// https://stackoverflow.com/questions/21255551/wpf-how-to-make-a-textbox-dynamically-sized-yet-prevent-autosizing
     /// </summary>
-    internal class LimitChild : System.Windows.Controls.Panel
+    internal class LimitChild : Panel
     {
         public LimitChild()
         {
@@ -16,10 +17,12 @@ namespace Challenge1.Support
             System.Diagnostics.Debug.Assert(InternalChildren.Count == 1);
             UIElement child = InternalChildren[0];
 
-            Size panelDesiredSize = new Size();
-            // panelDesiredSize.Width = availableSize.Width;
-            panelDesiredSize.Width = (double)child.GetValue(FrameworkElement.MinWidthProperty);
-            panelDesiredSize.Height = (double)child.GetValue(FrameworkElement.MinHeightProperty);
+            Size panelDesiredSize = new Size()
+            {
+                // panelDesiredSize.Width = availableSize.Width;
+                Width = (double)child.GetValue(FrameworkElement.MinWidthProperty),
+                Height = (double)child.GetValue(FrameworkElement.MinHeightProperty)
+            };
 
             child.Measure(panelDesiredSize);
 
