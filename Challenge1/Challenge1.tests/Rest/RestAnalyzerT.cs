@@ -13,7 +13,7 @@ namespace Challenge1_Tests.Rest
     [TestClass]
     public class RestAnalyzerT
     {
-        private readonly RestAnalyzer _restAnalyzer = new RestAnalyzer();
+        private readonly RestRequestor _restAnalyzer = new RestRequestor();
         private readonly MazeParams _params = new MazeParams();
 
         [TestInitialize]

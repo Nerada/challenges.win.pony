@@ -7,7 +7,13 @@ namespace Challenge1_Tests
     [TestClass]
     public class MainWindowViewModelT
     {
-        private readonly MainWindowViewModel _mainWindowVM = new MainWindowViewModel();
+        private MainWindowViewModel _mainWindowVM;
+
+        [TestInitialize]
+        public void Initializer()
+        {
+            _mainWindowVM = new MainWindowViewModel();
+        }
 
         [TestMethod]
         public void TestWidthValidaton()

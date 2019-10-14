@@ -11,15 +11,24 @@ namespace Challenge1.Rest
     /// <summary>
     /// Class for calling and analyzing Rest
     /// </summary>
-    public class RestAnalyzer
+    public class RestRequestor
     {
         private readonly RestHandler _restHandler = new RestHandler();
 
+        private string _mazeId;
+
         public string CreateMaze(JObject payload)
         {
+            if (payload == null)
+            {
+                throw new Exception("Cannot call function without payload");
+            }
+
             try
             {
-                string response = _restHandler.Request(RestHandler.Actions.CreateMaze, payload);
+                string response = _restHandler.Request(new RequestURL(RequestURL.RestAction.CreateMaze), payload);
+
+                _mazeId = JObject.Parse(response).Value<string>("maze_id");
                 JObject createReturn = JObject.Parse(response);
                 return createReturn.ToString();
             }
@@ -35,18 +44,33 @@ namespace Challenge1.Rest
 
         public string RetrieveMaze()
         {
-            return _restHandler.Request(RestHandler.Actions.GetMaze);
+            if (string.IsNullOrEmpty(_mazeId))
+            {
+                throw new Exception("Create a maze first!");
+            }
+            
+            return _restHandler.Request(new RequestURL(RequestURL.RestAction.GetMaze, _mazeId));
         }
 
         public string Move(string direction)
         {
+            if (string.IsNullOrEmpty(_mazeId))
+            {
+                throw new Exception("Create a maze first!");
+            }
+
             JObject directionPayload = new JObject()
             {
                 { "direction", direction }
             };
 
-            string response = _restHandler.Request(RestHandler.Actions.NextMove, directionPayload);
+            string response = _restHandler.Request(new RequestURL(RequestURL.RestAction.NextMove, _mazeId), directionPayload);
 
+            return ParseMoveResult(response);
+        }
+
+        private string ParseMoveResult(string response)
+        {
             try
             {
                 string state = JObject.Parse(response).SelectToken("state").ToString();

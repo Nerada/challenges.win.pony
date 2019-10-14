@@ -6,42 +6,71 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
+using static Challenge1.Rest.RequestURL;
 
 namespace Challenge1.Rest
 {
-    internal class RestHandler
+    public class RestHandler
     {
-        public enum Actions { CreateMaze, GetMazeState, NextMove, GetMaze, GetImage }
-
-        private readonly Dictionary<Actions, RequestInfo> _calls;
+        public enum RequestType
+        {
+            POST,
+            GET
+        }
 
         public RestHandler()
         {
-            _calls = new Dictionary<Actions, RequestInfo>()
-            {
-                { Actions.CreateMaze, new RequestInfo("POST", "maze" ) },
-                { Actions.GetMazeState, new RequestInfo("GET", "maze/{0}") },
-                { Actions.NextMove, new RequestInfo("POST", "maze/{0}") },
-                { Actions.GetMaze, new RequestInfo("GET", "maze/{0}/print") }
-            };
+
         }
 
-        public string Request(Actions action, JObject messageData = null)
+        public string Request(RequestURL action, JObject messageData = null)
         {
-            string data = messageData?.ToString();
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri: new Uri(_calls[action].Call));
-            request.Method = _calls[action].Type;
-
-            if (_calls[action].Type == "POST")
+            if (action == null)
             {
-                request.ContentType = "application/json";
-                request.ContentLength = data.Length;
-                StreamWriter requestWriter = new StreamWriter(request.GetRequestStream(), System.Text.Encoding.ASCII);
-                requestWriter.Write(data);
-                requestWriter.Close();
+                throw new Exception("Request action cannot be null");
             }
 
+            if (action.RequestType == RequestType.POST)
+            {
+                if (messageData == null)
+                {
+                    throw new Exception("Cannot send empty POST request");
+                }
+
+                return Request(PostRequest(action.Call, messageData.ToString()));
+            }
+            else
+            {
+                return Request(GetRequest(action.Call));
+            }
+
+            throw new Exception("Unhandled request type");
+        }
+
+        private HttpWebRequest GetRequest(Uri url)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri: url);
+            request.Method = RequestType.GET.ToString();
+
+            return request;
+        }
+
+        private HttpWebRequest PostRequest(Uri url, string messageData)
+        {
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri: url);
+            request.Method = RequestType.POST.ToString();
+
+            request.ContentType = "application/json";
+            request.ContentLength = messageData.Length;
+            StreamWriter requestWriter = new StreamWriter(request.GetRequestStream(), System.Text.Encoding.ASCII);
+            requestWriter.Write(messageData);
+            requestWriter.Close();
+
+            return request;
+        }
+
+        private string Request(HttpWebRequest request)
+        {
             string response;
 
             try
@@ -51,13 +80,6 @@ namespace Challenge1.Rest
                 StreamReader responseReader = new StreamReader(webStream);
                 response = responseReader.ReadToEnd();
                 responseReader.Close();
-
-                if (action == Actions.CreateMaze && webResponse.StatusCode == HttpStatusCode.OK)
-                {
-                    string mazeId = JObject.Parse(response).Value<string>("maze_id");
-
-                    _calls.Where(kvp => kvp.Key != Actions.CreateMaze).ToList().ForEach(kvp => kvp.Value.MazeId = mazeId);
-                }
             }
             catch (WebException e)
             {
@@ -69,23 +91,6 @@ namespace Challenge1.Rest
             }
 
             return response;
-        }
-
-        private class RequestInfo
-        {
-            private readonly string URL = $"https://ponychallenge.trustpilot.com/pony-challenge/";
-
-            public RequestInfo(string type, string options)
-            {
-                Type = type;
-                Options = options;
-            }
-
-            public string MazeId { private get; set; }
-            public string Type { get; private set; }
-            public string Options { private get; set; }
-
-            public string Call => string.IsNullOrEmpty(Options) ? URL : URL + string.Format(CultureInfo.InvariantCulture, Options, MazeId);
         }
     }
 }

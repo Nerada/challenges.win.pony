@@ -20,14 +20,14 @@ namespace Challenge1.ViewModels
         #region Fields
 
         private readonly MazeParams _mazeParams = new MazeParams();
-        private readonly RestAnalyzer _restAnalyzer = new RestAnalyzer();
+        private readonly RestRequestor _restRequestor = new RestRequestor();
 
         private ICommand _clickCommand;
         private ICommand _walkCommand;
         private ICommand _ChangeLanguageCommand;
 
         private string _lastStatus; // Used for displaying status info
-        private string _restStatus; // Used for displahing request to the server
+        private string _restStatus; // Used for displaying request to the server
         private string _mazeStatus; // Used for printing the maze
 
         private bool _validPlayerName = true;
@@ -239,10 +239,10 @@ namespace Challenge1.ViewModels
                 SetStatus(StatusType.Info, ResourceHandler.GetString("MainWindowViewModel_info_setting_game"));
                 JObject requestPayload = _mazeParams.ToJson();
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_creating_maze"), requestPayload.ToString());
-                LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_created_maze"), _restAnalyzer.CreateMaze(requestPayload));
+                LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_created_maze"), _restRequestor.CreateMaze(requestPayload));
 
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_get_maze"));
-                MazeStatus = _restAnalyzer.RetrieveMaze();
+                MazeStatus = _restRequestor.RetrieveMaze();
 
                 CanExecuteWalk = true;
 
@@ -270,10 +270,10 @@ namespace Challenge1.ViewModels
             {
                 LogRestInfo($"{ResourceHandler.GetString("MainWindowViewModel_rest_walk_direction")} {(string)param}");
 
-                SetStatus(StatusType.Info, _restAnalyzer.Move((string)param));
+                SetStatus(StatusType.Info, _restRequestor.Move((string)param));
 
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_updating_maze"));
-                MazeStatus = _restAnalyzer.RetrieveMaze();
+                MazeStatus = _restRequestor.RetrieveMaze();
             }
             catch (Exception e)
             {
