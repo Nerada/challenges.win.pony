@@ -13,8 +13,6 @@ namespace Challenge1.Rest
     /// </summary>
     public class RestRequestor
     {
-        private readonly RestHandler _restHandler = new RestHandler();
-
         private string _mazeId;
 
         public string CreateMaze(JObject payload)
@@ -26,7 +24,7 @@ namespace Challenge1.Rest
 
             try
             {
-                string response = _restHandler.Request(new RequestURL(RequestURL.RestAction.CreateMaze), payload);
+                string response = RestHandler.Request(new RequestURL(RequestURL.RestAction.CreateMaze), payload);
 
                 _mazeId = JObject.Parse(response).Value<string>("maze_id");
                 JObject createReturn = JObject.Parse(response);
@@ -49,7 +47,7 @@ namespace Challenge1.Rest
                 throw new Exception("Create a maze first!");
             }
             
-            return _restHandler.Request(new RequestURL(RequestURL.RestAction.GetMaze, _mazeId));
+            return RestHandler.Request(new RequestURL(RequestURL.RestAction.GetMaze, _mazeId));
         }
 
         public string Move(string direction)
@@ -64,12 +62,12 @@ namespace Challenge1.Rest
                 { "direction", direction }
             };
 
-            string response = _restHandler.Request(new RequestURL(RequestURL.RestAction.NextMove, _mazeId), directionPayload);
+            string response = RestHandler.Request(new RequestURL(RequestURL.RestAction.NextMove, _mazeId), directionPayload);
 
             return ParseMoveResult(response);
         }
 
-        private string ParseMoveResult(string response)
+        private static string ParseMoveResult(string response)
         {
             try
             {

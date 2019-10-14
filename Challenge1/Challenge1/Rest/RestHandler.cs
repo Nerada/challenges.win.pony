@@ -10,7 +10,7 @@ using static Challenge1.Rest.RequestURL;
 
 namespace Challenge1.Rest
 {
-    public class RestHandler
+    public static class RestHandler
     {
         public enum RequestType
         {
@@ -18,12 +18,7 @@ namespace Challenge1.Rest
             GET
         }
 
-        public RestHandler()
-        {
-
-        }
-
-        public string Request(RequestURL action, JObject messageData = null)
+        public static string Request(RequestURL action, JObject messageData = null)
         {
             if (action == null)
             {
@@ -47,7 +42,7 @@ namespace Challenge1.Rest
             throw new Exception("Unhandled request type");
         }
 
-        private HttpWebRequest GetRequest(Uri url)
+        private static HttpWebRequest GetRequest(Uri url)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri: url);
             request.Method = RequestType.GET.ToString();
@@ -55,7 +50,7 @@ namespace Challenge1.Rest
             return request;
         }
 
-        private HttpWebRequest PostRequest(Uri url, string messageData)
+        private static HttpWebRequest PostRequest(Uri url, string messageData)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri: url);
             request.Method = RequestType.POST.ToString();
@@ -69,7 +64,7 @@ namespace Challenge1.Rest
             return request;
         }
 
-        private string Request(HttpWebRequest request)
+        private static string Request(HttpWebRequest request)
         {
             string response;
 
@@ -83,6 +78,11 @@ namespace Challenge1.Rest
             }
             catch (WebException e)
             {
+                if (e.InnerException != null && e.InnerException.Message == "No such host is known.")
+                {
+                    throw new WebException("Cannot connect to Trustpilot.");
+                }
+
                 var resp = new StreamReader(e.Response.GetResponseStream());
                 string messageFromServer = resp.ReadToEnd();
                 resp.Close();
