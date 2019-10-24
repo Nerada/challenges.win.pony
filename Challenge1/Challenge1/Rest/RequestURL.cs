@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Text;
+
 using static Challenge1.Rest.RestHandler;
 
 namespace Challenge1.Rest
@@ -34,7 +34,7 @@ namespace Challenge1.Rest
 
         public RequestURL(RestAction action, string mazeId = "")
         {
-            if(action != RestAction.CreateMaze && string.IsNullOrEmpty(mazeId))
+            if (action != RestAction.CreateMaze && string.IsNullOrEmpty(mazeId))
             {
                 throw new Exception("Maze Id is required for this type of action.");
             }

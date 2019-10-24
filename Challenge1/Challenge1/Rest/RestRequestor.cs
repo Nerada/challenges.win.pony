@@ -46,7 +46,7 @@ namespace Challenge1.Rest
             {
                 throw new Exception("Create a maze first!");
             }
-            
+
             return RestHandler.Request(new RequestURL(RequestURL.RestAction.GetMaze, _mazeId));
         }
 

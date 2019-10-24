@@ -1,12 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Net;
-using static Challenge1.Rest.RequestURL;
 
 namespace Challenge1.Rest
 {

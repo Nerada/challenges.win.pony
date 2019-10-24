@@ -37,9 +37,14 @@ namespace Challenge1.Support
 
             child.Arrange(new Rect(0, 0, finalSize.Width, finalSize.Height));
             if (finalSize.Width > child.RenderSize.Width)
+            {
                 finalSize.Width = child.RenderSize.Width;
+            }
+
             if (finalSize.Height > child.RenderSize.Height)
+            {
                 finalSize.Height = child.RenderSize.Height;
+            }
 
             return finalSize; // Returns the final Arranged size
         }
