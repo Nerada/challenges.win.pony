@@ -1,4 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1.Rest.RestHandler.cs
+// Created on: 2019107
+//-----------------------------------------------
+
+using Newtonsoft.Json.Linq;
 
 using System;
 using System.IO;
@@ -40,7 +46,7 @@ namespace Challenge1.Rest
 
         private static HttpWebRequest GetRequest(Uri url)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri: url);
+            var request = (HttpWebRequest)WebRequest.Create(requestUri: url);
             request.Method = RequestType.GET.ToString();
 
             return request;
@@ -48,12 +54,12 @@ namespace Challenge1.Rest
 
         private static HttpWebRequest PostRequest(Uri url, string messageData)
         {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(requestUri: url);
+            var request = (HttpWebRequest)WebRequest.Create(requestUri: url);
             request.Method = RequestType.POST.ToString();
 
             request.ContentType = "application/json";
             request.ContentLength = messageData.Length;
-            StreamWriter requestWriter = new StreamWriter(request.GetRequestStream(), System.Text.Encoding.ASCII);
+            var requestWriter = new StreamWriter(request.GetRequestStream(), System.Text.Encoding.ASCII);
             requestWriter.Write(messageData);
             requestWriter.Close();
 
@@ -68,7 +74,7 @@ namespace Challenge1.Rest
             {
                 var webResponse = (HttpWebResponse)request.GetResponse();
                 Stream webStream = webResponse.GetResponseStream();
-                StreamReader responseReader = new StreamReader(webStream);
+                var responseReader = new StreamReader(webStream);
                 response = responseReader.ReadToEnd();
                 responseReader.Close();
             }

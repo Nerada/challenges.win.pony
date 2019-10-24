@@ -1,4 +1,10 @@
-﻿using Challenge1.ViewModels;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1.MainWindow.xaml.cs
+// Created on: 2019927
+//-----------------------------------------------
+
+using Challenge1.ViewModels;
 
 using System;
 using System.Collections.Generic;
@@ -39,7 +45,7 @@ namespace Challenge1
 
         private void DefaultTextbox_Enter(object sender, EventArgs e)
         {
-            TextBox tb = (TextBox)sender;
+            var tb = (TextBox)sender;
 
             if (!string.IsNullOrEmpty(tb.Text))
             {
@@ -53,7 +59,7 @@ namespace Challenge1
 
         private void DefaultTextbox_Leave(object sender, EventArgs e)
         {
-            TextBox tb = (TextBox)sender;
+            var tb = (TextBox)sender;
 
             if (!string.IsNullOrEmpty(tb.Text.Trim())) { return; }
             // Lets get a new random player name just for fun

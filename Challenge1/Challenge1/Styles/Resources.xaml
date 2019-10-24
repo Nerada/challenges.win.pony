@@ -1,4 +1,10 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<!--_____________________________________________
+|       Autor: Ramon Bollen
+|        File: Resources.xaml
+|  Created on: 2019104
+ _____________________________________________-->
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Challenge1">
     <Style x:Key="LabelStyle" TargetType="{x:Type Label}">

@@ -1,4 +1,10 @@
-﻿using Challenge1.Models;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1_Tests.Models.MazeParamsT.cs
+// Created on: 2019108
+//-----------------------------------------------
+
+using Challenge1.Models;
 using Challenge1.Support;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

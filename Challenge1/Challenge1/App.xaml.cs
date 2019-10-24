@@ -1,4 +1,10 @@
-﻿using Challenge1.Support.Dialogs;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1.App.xaml.cs
+// Created on: 2019927
+//-----------------------------------------------
+
+using Challenge1.Support.Dialogs;
 
 using System.Windows;
 

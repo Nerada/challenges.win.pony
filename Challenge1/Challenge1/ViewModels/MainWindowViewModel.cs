@@ -1,4 +1,10 @@
-﻿using Challenge1.Models;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1.ViewModels.MainWindowViewModel.cs
+// Created on: 2019104
+//-----------------------------------------------
+
+using Challenge1.Models;
 using Challenge1.Resources;
 using Challenge1.Rest;
 using Challenge1.Support;
@@ -19,20 +25,20 @@ namespace Challenge1.ViewModels
     {
         #region Fields
 
-        private readonly MazeParams _mazeParams = new MazeParams();
-        private readonly RestRequestor _restRequestor = new RestRequestor();
+        private readonly MazeParams    _mazeParams             = new MazeParams();
+        private readonly RestRequestor _restRequestor          = new RestRequestor();
 
-        private ICommand _clickCommand;
-        private ICommand _walkCommand;
-        private ICommand _ChangeLanguageCommand;
+        private ICommand               _clickCommand;
+        private ICommand               _walkCommand;
+        private ICommand               _ChangeLanguageCommand;
 
-        private string _lastStatus; // Used for displaying status info
-        private string _restStatus; // Used for displaying request to the server
-        private string _mazeStatus; // Used for printing the maze
+        private string                 _lastStatus; // Used for displaying status info
+        private string                 _restStatus; // Used for displaying request to the server
+        private string                 _mazeStatus; // Used for printing the maze
 
-        private bool _validPlayerName = true;
+        private bool                   _validPlayerName        = true;
 
-        private string _startGameButtonContent = ResourceHandler.GetString("MainWindowViewModel_button_start_game");
+        private string                 _startGameButtonContent = ResourceHandler.GetString("MainWindowViewModel_button_start_game");
 
         private enum StatusType { Info, Warning, Error }
 
@@ -55,7 +61,7 @@ namespace Challenge1.ViewModels
 
         public string PlayerName
         {
-            get { return _mazeParams.PlayerName; }
+            get => _mazeParams.PlayerName;
             set
             {
                 _mazeParams.PlayerName = value;
@@ -66,7 +72,7 @@ namespace Challenge1.ViewModels
 
         public bool ValidPlayerName
         {
-            get { return _validPlayerName; }
+            get => _validPlayerName;
             set
             {
                 _validPlayerName = value;
@@ -76,7 +82,7 @@ namespace Challenge1.ViewModels
 
         public int MazeWidth
         {
-            get { return _mazeParams.Width; }
+            get => _mazeParams.Width;
             set
             {
                 try
@@ -94,11 +100,11 @@ namespace Challenge1.ViewModels
             }
         }
 
-        public bool ValidMazeWidth { get { return _mazeParams.ValidWidth; } }
+        public bool ValidMazeWidth => _mazeParams.ValidWidth;
 
         public int MazeHeight
         {
-            get { return _mazeParams.Height; }
+            get => _mazeParams.Height;
             set
             {
                 try
@@ -116,14 +122,11 @@ namespace Challenge1.ViewModels
             }
         }
 
-        public bool ValidMazeHeight { get { return _mazeParams.ValidHeight; } }
+        public bool ValidMazeHeight => _mazeParams.ValidHeight;
 
         public string MazeDifficulty
         {
-            get
-            {
-                return (_mazeParams.Difficulty == null) ? string.Empty : _mazeParams.Difficulty.ToString();
-            }
+            get => (_mazeParams.Difficulty == null) ? string.Empty : _mazeParams.Difficulty.ToString();
             set
             {
                 try
@@ -147,16 +150,13 @@ namespace Challenge1.ViewModels
             }
         }
 
-        public bool ValidMazeDifficulty { get { return _mazeParams.ValidDifficulty; } }
+        public bool ValidMazeDifficulty => _mazeParams.ValidDifficulty;
 
-        public static string RandomPlayer
-        {
-            get { return MazeParams.GetRandomVerifiedPlayerName(); }
-        }
+        public static string RandomPlayer => MazeParams.GetRandomVerifiedPlayerName();
 
         public string Status
         {
-            get { return _lastStatus; }
+            get => _lastStatus;
             set
             {
                 _lastStatus = value;
@@ -169,7 +169,7 @@ namespace Challenge1.ViewModels
 
         public string RestStatus
         {
-            get { return _restStatus; }
+            get => _restStatus;
             private set
             {
                 _restStatus = value;
@@ -179,7 +179,7 @@ namespace Challenge1.ViewModels
 
         public string MazeStatus
         {
-            get { return _mazeStatus; }
+            get => _mazeStatus;
             private set
             {
                 _mazeStatus = value;
@@ -189,7 +189,7 @@ namespace Challenge1.ViewModels
 
         public string StartGameButtonContent
         {
-            get { return _startGameButtonContent; }
+            get => _startGameButtonContent;
             set
             {
                 _startGameButtonContent = value;
@@ -290,7 +290,7 @@ namespace Challenge1.ViewModels
             {
                 ResourceHandler.SetLanguage(selectedLanguage);
 
-                List<PropertyInfo> properties = new List<PropertyInfo>(typeof(MainWindowViewModel).GetProperties());
+                var properties = new List<PropertyInfo>(typeof(MainWindowViewModel).GetProperties());
                 properties.ForEach(p => OnPropertyChange(nameof(p)));
             }
         }

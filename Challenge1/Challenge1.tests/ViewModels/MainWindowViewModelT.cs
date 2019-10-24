@@ -1,3 +1,9 @@
+//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1_Tests.MainWindowViewModelT.cs
+// Created on: 2019108
+//-----------------------------------------------
+
 using Challenge1.ViewModels;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;

@@ -1,4 +1,10 @@
-﻿using System;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1.Support.InvalidInputException.cs
+// Created on: 2019104
+//-----------------------------------------------
+
+using System;
 
 namespace Challenge1.Support
 {

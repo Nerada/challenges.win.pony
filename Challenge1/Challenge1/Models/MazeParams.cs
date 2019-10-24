@@ -1,4 +1,10 @@
-﻿using Challenge1.Resources;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1.Models.MazeParams.cs
+// Created on: 2019104
+//-----------------------------------------------
+
+using Challenge1.Resources;
 using Challenge1.Support;
 
 using Newtonsoft.Json.Linq;
@@ -15,9 +21,9 @@ namespace Challenge1.Models
     {
         #region Fields
 
-        private int _width = 20;
-        private int _height = 20;
-        private int? _difficulty;
+        private int                    _width  = 20;
+        private int                    _height = 20;
+        private int?                   _difficulty;
         private static readonly Random _random = new Random();
 
         #endregion Fields
@@ -36,7 +42,7 @@ namespace Challenge1.Models
 
         public int Width
         {
-            get { return _width; }
+            get => _width;
             set
             {
                 _width = value;
@@ -44,11 +50,11 @@ namespace Challenge1.Models
             }
         }
 
-        public bool ValidWidth { get { return IsValidSize(Width); } }
+        public bool ValidWidth => IsValidSize(Width);
 
         public int Height
         {
-            get { return _height; }
+            get => _height;
             set
             {
                 _height = value;
@@ -56,13 +62,13 @@ namespace Challenge1.Models
             }
         }
 
-        public bool ValidHeight { get { return IsValidSize(Height); } }
+        public bool ValidHeight => IsValidSize(Height);
 
         public string PlayerName { get; set; } = GetRandomVerifiedPlayerName();
 
         public int? Difficulty
         {
-            get { return _difficulty; }
+            get => _difficulty;
             set
             {
                 _difficulty = value;
@@ -70,7 +76,7 @@ namespace Challenge1.Models
             }
         }
 
-        public bool ValidDifficulty { get { return IsValidDifficulty(Difficulty); } }
+        public bool ValidDifficulty => IsValidDifficulty(Difficulty);
 
         #endregion Properties
 
@@ -96,12 +102,12 @@ namespace Challenge1.Models
 
         private static bool IsValidDifficulty(int? dif)
         {
-            return (dif == null || (dif >= 0 && dif <= 10));
+            return dif == null || (dif >= 0 && dif <= 10);
         }
 
         public JObject ToJson()
         {
-            JObject returnJSON = new JObject(
+            var returnJSON = new JObject(
                 new JProperty("maze-width", Width),
                 new JProperty("maze-height", Height),
                 new JProperty("maze-player-name", PlayerName));

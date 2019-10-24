@@ -1,4 +1,10 @@
-﻿using System.Collections.Generic;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1.Resources.ResourceHandler.cs
+// Created on: 2019105
+//-----------------------------------------------
+
+using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
@@ -10,9 +16,9 @@ namespace Challenge1.Resources
     /// </summary>
     public static class ResourceHandler
     {
-        private static string _dictionaryName;
+        private static string          _dictionaryName;
         private static ResourceManager _resMrg;
-        private static CultureInfo _cul;
+        private static CultureInfo     _cul;
 
         public enum Language
         {
@@ -29,7 +35,7 @@ namespace Challenge1.Resources
         public static Dictionary<Language, string> Languages { get; } = new Dictionary<Language, string>()
         {
             { Language.English, "en-US" },
-            { Language.Dutch, "nl-NL" },
+            { Language.Dutch,   "nl-NL" },
             { Language.Chinese, "zh-cn" }
         };
 

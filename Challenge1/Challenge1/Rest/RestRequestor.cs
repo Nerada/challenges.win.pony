@@ -1,4 +1,10 @@
-﻿using Challenge1.Support;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1.Rest.RestRequestor.cs
+// Created on: 2019107
+//-----------------------------------------------
+
+using Challenge1.Support;
 
 using Newtonsoft.Json.Linq;
 
@@ -27,7 +33,7 @@ namespace Challenge1.Rest
                 string response = RestHandler.Request(new RequestURL(RequestURL.RestAction.CreateMaze), payload);
 
                 _mazeId = JObject.Parse(response).Value<string>("maze_id");
-                JObject createReturn = JObject.Parse(response);
+                var createReturn = JObject.Parse(response);
                 return createReturn.ToString();
             }
             catch (WebException e)
@@ -57,7 +63,7 @@ namespace Challenge1.Rest
                 throw new Exception("Create a maze first!");
             }
 
-            JObject directionPayload = new JObject()
+            var directionPayload = new JObject()
             {
                 { "direction", direction }
             };

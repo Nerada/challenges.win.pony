@@ -1,4 +1,10 @@
-﻿using System;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1.Support.InvalidPlayerNameException.cs
+// Created on: 2019106
+//-----------------------------------------------
+
+using System;
 
 namespace Challenge1.Support
 {

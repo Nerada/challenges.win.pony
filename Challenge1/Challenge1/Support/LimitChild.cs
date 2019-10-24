@@ -1,4 +1,10 @@
-﻿using System.Windows;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1.Support.LimitChild.cs
+// Created on: 2019105
+//-----------------------------------------------
+
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Challenge1.Support
@@ -17,7 +23,7 @@ namespace Challenge1.Support
             System.Diagnostics.Debug.Assert(InternalChildren.Count == 1);
             UIElement child = InternalChildren[0];
 
-            Size panelDesiredSize = new Size()
+            var panelDesiredSize = new Size()
             {
                 // panelDesiredSize.Width = availableSize.Width;
                 Width = (double)child.GetValue(FrameworkElement.MinWidthProperty),

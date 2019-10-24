@@ -1,4 +1,10 @@
-﻿<Application x:Class="Challenge1.App"
+﻿<!--_____________________________________________
+|       Autor: Ramon Bollen
+|        File: App.xaml
+|  Created on: 2019927
+ _____________________________________________-->
+
+<Application x:Class="Challenge1.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Startup="ApplicationStart">

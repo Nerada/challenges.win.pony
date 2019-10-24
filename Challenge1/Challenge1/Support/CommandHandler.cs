@@ -1,4 +1,10 @@
-﻿using System;
+﻿//-----------------------------------------------
+//      Autor: Ramon Bollen
+//       File: Challenge1.Support.CommandHandler.cs
+// Created on: 2019104
+//-----------------------------------------------
+
+using System;
 using System.Windows.Input;
 
 namespace Challenge1.Support
@@ -10,7 +16,7 @@ namespace Challenge1.Support
     public class CommandHandler : ICommand
     {
         private readonly Action<object> _action;
-        private readonly Func<bool> _canExecute;
+        private readonly Func<bool>     _canExecute;
 
         /// <summary>
         /// Creates instance of the command handler
