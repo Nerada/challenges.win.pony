@@ -6,10 +6,9 @@
 
 using Challenge1.Models;
 using Challenge1.Support;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Challenge1_Tests.Models
+namespace Challenge1.tests.Models
 {
     [TestClass]
     public class MazeParamsT
