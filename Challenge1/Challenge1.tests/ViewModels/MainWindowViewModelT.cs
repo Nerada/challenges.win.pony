@@ -1,5 +1,5 @@
 //-----------------------------------------------
-//      Autor: Ramon Bollen
+//      Author: Ramon Bollen
 //       File: Challenge1_Tests.MainWindowViewModelT.cs
 // Created on: 2019108
 //-----------------------------------------------

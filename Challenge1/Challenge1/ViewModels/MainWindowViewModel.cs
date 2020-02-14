@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------
-//      Autor: Ramon Bollen
+//      Author: Ramon Bollen
 //       File: Challenge1.ViewModels.MainWindowViewModel.cs
 // Created on: 2019104
 //-----------------------------------------------
@@ -25,20 +25,20 @@ namespace Challenge1.ViewModels
     {
         #region Fields
 
-        private readonly MazeParams    _mazeParams             = new MazeParams();
-        private readonly RestRequestor _restRequestor          = new RestRequestor();
+        private readonly MazeParams _mazeParams = new MazeParams();
+        private readonly RestRequestor _restRequestor = new RestRequestor();
 
-        private ICommand               _clickCommand;
-        private ICommand               _walkCommand;
-        private ICommand               _ChangeLanguageCommand;
+        private ICommand _clickCommand;
+        private ICommand _walkCommand;
+        private ICommand _ChangeLanguageCommand;
 
-        private string                 _lastStatus; // Used for displaying status info
-        private string                 _restStatus; // Used for displaying request to the server
-        private string                 _mazeStatus; // Used for printing the maze
+        private string _lastStatus; // Used for displaying status info
+        private string _restStatus; // Used for displaying request to the server
+        private string _mazeStatus; // Used for printing the maze
 
-        private bool                   _validPlayerName        = true;
+        private bool _validPlayerName = true;
 
-        private string                 _startGameButtonContent = ResourceHandler.GetString("MainWindowViewModel_button_start_game");
+        private string _startGameButtonContent = ResourceHandler.GetString("MainWindowViewModel_button_start_game");
 
         private enum StatusType { Info, Warning, Error }
 

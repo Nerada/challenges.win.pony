@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------
-//      Autor: Ramon Bollen
+//      Author: Ramon Bollen
 //       File: Challenge1_Tests.Rest.RestAnalyzerT.cs
 // Created on: 2019108
 //-----------------------------------------------
@@ -19,8 +19,8 @@ namespace Challenge1_Tests.Rest
     [TestClass]
     public class RestAnalyzerT
     {
-        private readonly RestRequestor _restAnalyzer    = new RestRequestor();
-        private readonly MazeParams    _params          = new MazeParams();
+        private readonly RestRequestor _restAnalyzer = new RestRequestor();
+        private readonly MazeParams _params = new MazeParams();
 
         [TestInitialize]
         public void Initializer()

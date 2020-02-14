@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------
-//      Autor: Ramon Bollen
+//      Author: Ramon Bollen
 //       File: Challenge1.Resources.ResourceHandler.cs
 // Created on: 2019105
 //-----------------------------------------------

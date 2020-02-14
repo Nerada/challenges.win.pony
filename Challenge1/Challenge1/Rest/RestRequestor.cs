@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------
-//      Autor: Ramon Bollen
+//      Author: Ramon Bollen
 //       File: Challenge1.Rest.RestRequestor.cs
 // Created on: 2019107
 //-----------------------------------------------

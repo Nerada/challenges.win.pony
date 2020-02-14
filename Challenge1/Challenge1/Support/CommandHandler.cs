@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------
-//      Autor: Ramon Bollen
+//      Author: Ramon Bollen
 //       File: Challenge1.Support.CommandHandler.cs
 // Created on: 2019104
 //-----------------------------------------------
