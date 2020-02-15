@@ -69,7 +69,7 @@ namespace Challenge1.Rest
 
                     string fileName = hiddenURL.Substring(0, hiddenURL.LastIndexOf('.'))
                                                .Replace(@"/", "", StringComparison.InvariantCulture);
-                    ;
+                    
                     var    data          = Convert.FromBase64String(fileName);
                     string decodedString = Encoding.UTF8.GetString(data);
 

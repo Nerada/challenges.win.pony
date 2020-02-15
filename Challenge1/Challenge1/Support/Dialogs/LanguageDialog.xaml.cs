@@ -13,7 +13,7 @@ namespace Challenge1.Support.Dialogs
     /// <summary>
     ///     Interaction logic for Dialog.xaml
     /// </summary>
-    public partial class LanguageDialog : Window
+    public partial class LanguageDialog
     {
         public LanguageDialog()
         {
