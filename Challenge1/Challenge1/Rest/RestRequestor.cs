@@ -1,21 +1,19 @@
-﻿//-----------------------------------------------
-//      Author: Ramon Bollen
-//       File: Challenge1.Rest.RestRequestor.cs
-// Created on: 2019107
-//-----------------------------------------------
-
-using Challenge1.Support;
-
-using Newtonsoft.Json.Linq;
+﻿// -----------------------------------------------
+//     Author: Ramon Bollen
+//       File: Challenge1.RestRequestor.cs
+// Created on: 20191007
+// -----------------------------------------------
 
 using System;
 using System.Net;
 using System.Text;
+using Challenge1.Support;
+using Newtonsoft.Json.Linq;
 
 namespace Challenge1.Rest
 {
     /// <summary>
-    /// Class for calling and analyzing Rest
+    ///     Class for calling and analyzing Rest
     /// </summary>
     public class RestRequestor
     {
@@ -23,10 +21,7 @@ namespace Challenge1.Rest
 
         public string CreateMaze(JObject payload)
         {
-            if (payload == null)
-            {
-                throw new Exception("Cannot call function without payload");
-            }
+            if (payload == null) { throw new Exception("Cannot call function without payload"); }
 
             try
             {
@@ -38,35 +33,24 @@ namespace Challenge1.Rest
             }
             catch (WebException e)
             {
-                if (e.Message == "Only ponies can play")
-                {
-                    throw new InvalidPlayerNameException(e.Message);
-                }
+                if (e.Message == "Only ponies can play") { throw new InvalidPlayerNameException(e.Message); }
+
                 throw new WebException(e.Message);
             }
         }
 
         public string RetrieveMaze()
         {
-            if (string.IsNullOrEmpty(_mazeId))
-            {
-                throw new Exception("Create a maze first!");
-            }
+            if (string.IsNullOrEmpty(_mazeId)) { throw new Exception("Create a maze first!"); }
 
             return RestHandler.Request(new RequestURL(RequestURL.RestAction.GetMaze, _mazeId));
         }
 
         public string Move(string direction)
         {
-            if (string.IsNullOrEmpty(_mazeId))
-            {
-                throw new Exception("Create a maze first!");
-            }
+            if (string.IsNullOrEmpty(_mazeId)) { throw new Exception("Create a maze first!"); }
 
-            var directionPayload = new JObject()
-            {
-                { "direction", direction }
-            };
+            var directionPayload = new JObject {{"direction", direction}};
 
             string response = RestHandler.Request(new RequestURL(RequestURL.RestAction.NextMove, _mazeId), directionPayload);
 
@@ -77,14 +61,16 @@ namespace Challenge1.Rest
         {
             try
             {
-                string state = JObject.Parse(response).SelectToken("state").ToString();
+                var state = JObject.Parse(response).SelectToken("state").ToString();
 
                 if (state == "won" || state == "over")
                 {
-                    string hiddenURL = JObject.Parse(response).SelectToken("hidden-url").ToString();
+                    var hiddenURL = JObject.Parse(response).SelectToken("hidden-url").ToString();
 
-                    string fileName = hiddenURL.Substring(0, hiddenURL.LastIndexOf('.')).Replace(@"/", "", StringComparison.InvariantCulture); ;
-                    byte[] data = Convert.FromBase64String(fileName);
+                    string fileName = hiddenURL.Substring(0, hiddenURL.LastIndexOf('.'))
+                                               .Replace(@"/", "", StringComparison.InvariantCulture);
+                    ;
+                    var    data          = Convert.FromBase64String(fileName);
                     string decodedString = Encoding.UTF8.GetString(data);
 
                     string image = "/" + decodedString + ".jpg";
@@ -94,10 +80,7 @@ namespace Challenge1.Rest
 
                 return JObject.Parse(response).SelectToken("state-result").ToString();
             }
-            catch
-            {
-                throw new Exception();
-            }
+            catch { throw new Exception(); }
         }
     }
 }

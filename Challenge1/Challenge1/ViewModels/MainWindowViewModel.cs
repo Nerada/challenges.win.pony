@@ -1,15 +1,8 @@
-﻿//-----------------------------------------------
-//      Author: Ramon Bollen
-//       File: Challenge1.ViewModels.MainWindowViewModel.cs
-// Created on: 2019104
-//-----------------------------------------------
-
-using Challenge1.Models;
-using Challenge1.Resources;
-using Challenge1.Rest;
-using Challenge1.Support;
-
-using Newtonsoft.Json.Linq;
+﻿// -----------------------------------------------
+//     Author: Ramon Bollen
+//       File: Challenge1.MainWindowViewModel.cs
+// Created on: 20191004
+// -----------------------------------------------
 
 using System;
 using System.Collections.Generic;
@@ -18,6 +11,10 @@ using System.Globalization;
 using System.Reflection;
 using System.Windows.Input;
 using System.Windows.Media;
+using Challenge1.Models;
+using Challenge1.Resources;
+using Challenge1.Rest;
+using Challenge1.Support;
 
 namespace Challenge1.ViewModels
 {
@@ -25,12 +22,12 @@ namespace Challenge1.ViewModels
     {
         #region Fields
 
-        private readonly MazeParams _mazeParams = new MazeParams();
+        private readonly MazeParams    _mazeParams    = new MazeParams();
         private readonly RestRequestor _restRequestor = new RestRequestor();
 
         private ICommand _clickCommand;
         private ICommand _walkCommand;
-        private ICommand _ChangeLanguageCommand;
+        private ICommand _changeLanguageCommand;
 
         private string _lastStatus; // Used for displaying status info
         private string _restStatus; // Used for displaying request to the server
@@ -42,21 +39,20 @@ namespace Challenge1.ViewModels
 
         private enum StatusType { Info, Warning, Error }
 
-        private readonly Dictionary<StatusType, Brush> _statusColor = new Dictionary<StatusType, Brush>()
-        {
-            { StatusType.Info, new SolidColorBrush(Colors.Black) },
-            { StatusType.Warning, new SolidColorBrush(Colors.DarkOrange) },
-            { StatusType.Error, new SolidColorBrush(Colors.Red) }
+        private readonly Dictionary<StatusType, Brush> _statusColor = new Dictionary<StatusType, Brush> {
+            {StatusType.Info, new SolidColorBrush(Colors.Black)},
+            {StatusType.Warning, new SolidColorBrush(Colors.DarkOrange)},
+            {StatusType.Error, new SolidColorBrush(Colors.Red)}
         };
 
         #endregion Fields
 
         #region Properties
 
-        public static string WindowTitle => ResourceHandler.GetString("MainWindowViewModel_window_title");
-        public static string LabelPlayerName => ResourceHandler.GetString("MainWindowViewModel_label_player_name");
-        public static string LabelMazeWidth => ResourceHandler.GetString("MainWindowViewModel_label_maze_width");
-        public static string LabelMazeHeight => ResourceHandler.GetString("MainWindowViewModel_label_maze_height");
+        public static string WindowTitle         => ResourceHandler.GetString("MainWindowViewModel_window_title");
+        public static string LabelPlayerName     => ResourceHandler.GetString("MainWindowViewModel_label_player_name");
+        public static string LabelMazeWidth      => ResourceHandler.GetString("MainWindowViewModel_label_maze_width");
+        public static string LabelMazeHeight     => ResourceHandler.GetString("MainWindowViewModel_label_maze_height");
         public static string LabelMazeDifficulty => ResourceHandler.GetString("MainWindowViewModel_label_maze_difficulty");
 
         public string PlayerName
@@ -65,7 +61,7 @@ namespace Challenge1.ViewModels
             set
             {
                 _mazeParams.PlayerName = value;
-                ValidPlayerName = true;
+                ValidPlayerName        = true;
                 OnPropertyChange(nameof(PlayerName));
             }
         }
@@ -91,10 +87,7 @@ namespace Challenge1.ViewModels
                     OnPropertyChange(nameof(MazeWidth));
                     SetStatus(StatusType.Info, string.Empty);
                 }
-                catch (InvalidInputException e)
-                {
-                    SetStatus(StatusType.Warning, e.Message);
-                }
+                catch (InvalidInputException e) { SetStatus(StatusType.Warning, e.Message); }
 
                 OnPropertyChange(nameof(ValidMazeWidth));
             }
@@ -113,10 +106,7 @@ namespace Challenge1.ViewModels
                     OnPropertyChange(nameof(MazeHeight));
                     SetStatus(StatusType.Info, string.Empty);
                 }
-                catch (InvalidInputException e)
-                {
-                    SetStatus(StatusType.Warning, e.Message);
-                }
+                catch (InvalidInputException e) { SetStatus(StatusType.Warning, e.Message); }
 
                 OnPropertyChange(nameof(ValidMazeHeight));
             }
@@ -126,21 +116,18 @@ namespace Challenge1.ViewModels
 
         public string MazeDifficulty
         {
-            get => (_mazeParams.Difficulty == null) ? string.Empty : _mazeParams.Difficulty.ToString();
+            get => _mazeParams.Difficulty == null ? string.Empty : _mazeParams.Difficulty.ToString();
             set
             {
                 try
                 {
                     if (string.IsNullOrEmpty(value)) { _mazeParams.Difficulty = null; }
-                    else { _mazeParams.Difficulty = int.Parse(value, CultureInfo.InvariantCulture); }
+                    else { _mazeParams.Difficulty                             = int.Parse(value, CultureInfo.InvariantCulture); }
 
                     OnPropertyChange(nameof(MazeDifficulty));
                     SetStatus(StatusType.Info, string.Empty);
                 }
-                catch (InvalidInputException e)
-                {
-                    SetStatus(StatusType.Warning, e.Message);
-                }
+                catch (InvalidInputException e) { SetStatus(StatusType.Warning, e.Message); }
                 catch (FormatException)
                 {
                     SetStatus(StatusType.Warning, ResourceHandler.GetString("MainWindowViewModel_wrong_difficulty"));
@@ -197,7 +184,7 @@ namespace Challenge1.ViewModels
             }
         }
 
-        public ICommand StartGameCommand => _clickCommand ?? (_clickCommand = new CommandHandler(param => StartGameCmd(), () => CanExecuteStartGame));
+        public ICommand StartGameCommand => _clickCommand ??= new CommandHandler(param => StartGameCmd(), () => CanExecuteStartGame);
 
         private bool CanExecuteStartGame
         {
@@ -216,11 +203,14 @@ namespace Challenge1.ViewModels
             }
         }
 
-        public ICommand WalkCommand => _walkCommand ?? (_walkCommand = new CommandHandler(param => WalkCmd(param), () => CanExecuteWalk));
+        public ICommand WalkCommand => _walkCommand ??= new CommandHandler(WalkCmd, () => CanExecuteWalk);
+
         private bool CanExecuteWalk { get; set; }
 
-        public ICommand ChangeLanguageCommand => _ChangeLanguageCommand ?? (_ChangeLanguageCommand = new CommandHandler(param => ChangeLanguageCmd(param), () => CanExecuteChangeLanguage));
-        private bool CanExecuteChangeLanguage { get; set; } = true;
+        public ICommand ChangeLanguageCommand =>
+            _changeLanguageCommand ??= new CommandHandler(ChangeLanguageCmd, () => CanExecuteChangeLanguage);
+
+        private bool CanExecuteChangeLanguage { get; } = true;
 
         #endregion Properties
 
@@ -230,14 +220,14 @@ namespace Challenge1.ViewModels
         {
             if (!_mazeParams.IsValid()) { return; }
 
-            RestStatus = string.Empty;
-            CanExecuteWalk = false;
+            RestStatus           = string.Empty;
+            CanExecuteWalk       = false;
             Mouse.OverrideCursor = Cursors.Wait;
 
             try
             {
                 SetStatus(StatusType.Info, ResourceHandler.GetString("MainWindowViewModel_info_setting_game"));
-                JObject requestPayload = _mazeParams.ToJson();
+                var requestPayload = _mazeParams.ToJson();
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_creating_maze"), requestPayload.ToString());
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_created_maze"), _restRequestor.CreateMaze(requestPayload));
 
@@ -254,10 +244,7 @@ namespace Challenge1.ViewModels
                 ValidPlayerName = false;
                 SetStatus(StatusType.Error, e.Message);
             }
-            catch (Exception e)
-            {
-                SetStatus(StatusType.Error, e.Message);
-            }
+            catch (Exception e) { SetStatus(StatusType.Error, e.Message); }
 
             Mouse.OverrideCursor = Cursors.Arrow;
         }
@@ -268,9 +255,9 @@ namespace Challenge1.ViewModels
 
             try
             {
-                LogRestInfo($"{ResourceHandler.GetString("MainWindowViewModel_rest_walk_direction")} {(string)param}");
+                LogRestInfo($"{ResourceHandler.GetString("MainWindowViewModel_rest_walk_direction")} {(string) param}");
 
-                SetStatus(StatusType.Info, _restRequestor.Move((string)param));
+                SetStatus(StatusType.Info, _restRequestor.Move((string) param));
 
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_updating_maze"));
                 MazeStatus = _restRequestor.RetrieveMaze();
@@ -286,7 +273,7 @@ namespace Challenge1.ViewModels
 
         private void ChangeLanguageCmd(object language)
         {
-            if (Enum.TryParse((string)language, out ResourceHandler.Language selectedLanguage))
+            if (Enum.TryParse((string) language, out ResourceHandler.Language selectedLanguage))
             {
                 ResourceHandler.SetLanguage(selectedLanguage);
 
@@ -298,13 +285,14 @@ namespace Challenge1.ViewModels
         private void SetStatus(StatusType type, string message)
         {
             StatusColor = _statusColor[type];
-            Status = message;
+            Status      = message;
         }
 
         private void LogRestInfo(string action, string body = "")
         {
             string actionEnding = !string.IsNullOrEmpty(body) ? $": {Environment.NewLine}{body}" : ".";
-            RestStatus = $"{DateTime.Now.ToString("HH:mm:ss", CultureInfo.InvariantCulture)} {action}{actionEnding}{Environment.NewLine}" + RestStatus;
+            RestStatus = $"{DateTime.Now.ToString("HH:mm:ss", CultureInfo.InvariantCulture)} {action}{actionEnding}{Environment.NewLine}" +
+                         RestStatus;
         }
 
         #endregion Functions
@@ -313,10 +301,7 @@ namespace Challenge1.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChange(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        protected void OnPropertyChange(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
 
         #endregion Events
     }

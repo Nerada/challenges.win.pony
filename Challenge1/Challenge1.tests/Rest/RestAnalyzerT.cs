@@ -1,32 +1,29 @@
-﻿//-----------------------------------------------
-//      Author: Ramon Bollen
-//       File: Challenge1_Tests.Rest.RestAnalyzerT.cs
-// Created on: 2019108
-//-----------------------------------------------
+﻿// -----------------------------------------------
+//     Author: Ramon Bollen
+//       File: Challenge1.tests.RestAnalyzerT.cs
+// Created on: 20191008
+// -----------------------------------------------
 
+using System.Net;
 using Challenge1.Models;
 using Challenge1.Rest;
 using Challenge1.Support;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 using Newtonsoft.Json.Linq;
 
-using System.Net;
-
-namespace Challenge1_Tests.Rest
+namespace Challenge1.tests.Rest
 {
     [TestClass]
     public class RestAnalyzerT
     {
+        private readonly MazeParams    _params       = new MazeParams();
         private readonly RestRequestor _restAnalyzer = new RestRequestor();
-        private readonly MazeParams _params = new MazeParams();
 
         [TestInitialize]
         public void Initializer()
         {
-            _params.Height = 20;
-            _params.Width = 20;
+            _params.Height     = 20;
+            _params.Width      = 20;
             _params.PlayerName = MazeParams.GetRandomVerifiedPlayerName();
         }
 

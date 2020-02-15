@@ -1,17 +1,16 @@
-﻿//-----------------------------------------------
-//      Author: Ramon Bollen
+﻿// -----------------------------------------------
+//     Author: Ramon Bollen
 //       File: Challenge1.App.xaml.cs
-// Created on: 2019927
-//-----------------------------------------------
-
-using Challenge1.Support.Dialogs;
+// Created on: 20190927
+// -----------------------------------------------
 
 using System.Windows;
+using Challenge1.Support.Dialogs;
 
 namespace Challenge1
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application
     {
@@ -28,7 +27,7 @@ namespace Challenge1
                 var mainWindow = new MainWindow();
                 //Re-enable normal shutdown mode.
                 Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
-                Current.MainWindow = mainWindow;
+                Current.MainWindow   = mainWindow;
                 mainWindow.Show();
             }
             else

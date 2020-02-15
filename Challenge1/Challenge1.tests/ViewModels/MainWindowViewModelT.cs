@@ -1,14 +1,13 @@
-//-----------------------------------------------
-//      Author: Ramon Bollen
-//       File: Challenge1_Tests.MainWindowViewModelT.cs
-// Created on: 2019108
-//-----------------------------------------------
+// -----------------------------------------------
+//     Author: Ramon Bollen
+//       File: Challenge1.tests.MainWindowViewModelT.cs
+// Created on: 20191008
+// -----------------------------------------------
 
 using Challenge1.ViewModels;
-
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Challenge1_Tests
+namespace Challenge1.tests.ViewModels
 {
     [TestClass]
     public class MainWindowViewModelT
@@ -16,13 +15,10 @@ namespace Challenge1_Tests
         private MainWindowViewModel _mainWindowVM;
 
         [TestInitialize]
-        public void Initializer()
-        {
-            _mainWindowVM = new MainWindowViewModel();
-        }
+        public void Initializer() { _mainWindowVM = new MainWindowViewModel(); }
 
         [TestMethod]
-        public void TestWidthValidaton()
+        public void TestWidthValidation()
         {
             _mainWindowVM.MazeWidth = 10;
             Assert.IsFalse(_mainWindowVM.ValidMazeWidth);
@@ -32,7 +28,7 @@ namespace Challenge1_Tests
         }
 
         [TestMethod]
-        public void TestHeightValidaton()
+        public void TestHeightValidation()
         {
             _mainWindowVM.MazeHeight = 10;
             Assert.IsFalse(_mainWindowVM.ValidMazeHeight);
@@ -42,7 +38,7 @@ namespace Challenge1_Tests
         }
 
         [TestMethod]
-        public void TestDifficultyValidaton()
+        public void TestDifficultyValidation()
         {
             _mainWindowVM.MazeDifficulty = "11";
             Assert.IsFalse(_mainWindowVM.ValidMazeDifficulty);

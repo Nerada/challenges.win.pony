@@ -1,18 +1,24 @@
-﻿using Challenge1.Resources;
+﻿// -----------------------------------------------
+//     Author: Ramon Bollen
+//       File: Challenge1.LanguageDialog.xaml.cs
+// Created on: 20191006
+// -----------------------------------------------
 
+using System.ComponentModel;
 using System.Windows;
+using Challenge1.Resources;
 
 namespace Challenge1.Support.Dialogs
 {
     /// <summary>
-    /// Interaction logic for Dialog.xaml
+    ///     Interaction logic for Dialog.xaml
     /// </summary>
     public partial class LanguageDialog : Window
     {
         public LanguageDialog()
         {
             InitializeComponent();
-            Closing += new System.ComponentModel.CancelEventHandler(Window_Closing);
+            Closing += Window_Closing;
         }
 
         private void EnglishButton_Click(object sender, RoutedEventArgs e)
@@ -36,9 +42,6 @@ namespace Challenge1.Support.Dialogs
             Close();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            DialogResult = true;
-        }
+        private void Window_Closing(object sender, CancelEventArgs e) { DialogResult = true; }
     }
 }
