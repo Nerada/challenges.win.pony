@@ -33,7 +33,7 @@ stages:
         restoreSolution: '$(solutionFile)'
 
     - task: ResharperCli@2
-      timeoutInMinutes: 5
+      timeoutInMinutes: 10
       inputs:
         solutionOrProjectPath: '$(resharperSolution)'
         buildId: '$(version)'
