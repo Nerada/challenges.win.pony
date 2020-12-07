@@ -124,7 +124,7 @@
     <value>Start game</value>
   </data>
   <data name="MainWindowViewModel_info_ready_game" xml:space="preserve">
-    <value>Ready to play! Use the arrow keys or [W,S,A,D] to move. You are P, go to E but dont let D get to you!</value>
+    <value>Ready to play! Use the arrow keys or [W,S,A,D] to move. You are P, go to E but don't let D get to you!</value>
   </data>
   <data name="MainWindowViewModel_info_setting_game" xml:space="preserve">
     <value>Setting up game..</value>

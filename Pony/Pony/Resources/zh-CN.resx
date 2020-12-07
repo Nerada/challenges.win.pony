@@ -127,7 +127,7 @@
   </data>
   <data name="MainWindowViewModel_info_ready_game" xml:space="preserve">
     <value>准备开始！使用[上，下，左，右]键头或[W，S，A，D]键移动。 您是P， 请到达E，但不要让D找到您！</value>
-    <comment>Ready to play! Use the arrow keys or [W,S,A,D] to move. You are P, go to E but dont let D get to you!</comment>
+    <comment>Ready to play! Use the arrow keys or [W,S,A,D] to move. You are P, go to E but don't let D get to you!</comment>
   </data>
   <data name="MainWindowViewModel_info_setting_game" xml:space="preserve">
     <value>设置游戏。。</value>

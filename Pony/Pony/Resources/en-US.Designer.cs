@@ -79,7 +79,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ready to play! Use the arrow keys or [W,S,A,D] to move. You are P, go to E but dont let D get to you!.
+        ///   Looks up a localized string similar to Ready to play! Use the arrow keys or [W,S,A,D] to move. You are P, go to E but don&apos;t let D get to you!.
         /// </summary>
         public static string MainWindowViewModel_info_ready_game {
             get {

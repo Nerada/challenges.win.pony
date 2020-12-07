@@ -16,15 +16,21 @@ namespace Pony.Resources
     /// </summary>
     public static class ResourceHandler
     {
-        public enum Language { English, Dutch, Chinese }
+        public enum Language
+        {
+            English,
+            Dutch,
+            Chinese
+        }
 
         private static string          _dictionaryName;
         private static ResourceManager _resMrg;
         private static CultureInfo     _cul;
 
-        static ResourceHandler() { SetLanguage(Language.English); }
+        static ResourceHandler() => SetLanguage(Language.English);
 
-        public static Dictionary<Language, string> Languages { get; } = new Dictionary<Language, string> {
+        public static Dictionary<Language, string> Languages { get; } = new Dictionary<Language, string>
+        {
             {Language.English, "en-US"}, {Language.Dutch, "nl-NL"}, {Language.Chinese, "zh-cn"}
         };
 

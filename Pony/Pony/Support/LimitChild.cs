@@ -18,11 +18,12 @@ namespace Pony.Support
         protected override Size MeasureOverride(Size availableSize)
         {
             Debug.Assert(InternalChildren.Count == 1);
-            var child = InternalChildren[0];
+            UIElement child = InternalChildren[0];
 
-            var panelDesiredSize = new Size {
+            var panelDesiredSize = new Size
+            {
                 // panelDesiredSize.Width = availableSize.Width;
-                Width = (double) child.GetValue(MinWidthProperty), Height = (double) child.GetValue(MinHeightProperty)
+                Width = (double)child.GetValue(MinWidthProperty), Height = (double)child.GetValue(MinHeightProperty)
             };
 
             child.Measure(panelDesiredSize);
@@ -34,12 +35,13 @@ namespace Pony.Support
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            var child = InternalChildren[0];
+            UIElement child = InternalChildren[0];
 
             child.Arrange(new Rect(0, 0, finalSize.Width, finalSize.Height));
-            if (finalSize.Width > child.RenderSize.Width) { finalSize.Width = child.RenderSize.Width; }
 
-            if (finalSize.Height > child.RenderSize.Height) { finalSize.Height = child.RenderSize.Height; }
+            if (finalSize.Width > child.RenderSize.Width) finalSize.Width = child.RenderSize.Width;
+
+            if (finalSize.Height > child.RenderSize.Height) finalSize.Height = child.RenderSize.Height;
 
             return finalSize; // Returns the final Arranged size
         }

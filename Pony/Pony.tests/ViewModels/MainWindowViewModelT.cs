@@ -12,39 +12,39 @@ namespace Pony.tests.ViewModels
     [TestClass]
     public class MainWindowViewModelT
     {
-        private MainWindowViewModel _mainWindowVM;
+        private MainWindowViewModel _mainWindowVm;
 
         [TestInitialize]
-        public void Initializer() { _mainWindowVM = new MainWindowViewModel(); }
+        public void Initializer() => _mainWindowVm = new MainWindowViewModel();
 
         [TestMethod]
         public void TestWidthValidation()
         {
-            _mainWindowVM.MazeWidth = 10;
-            Assert.IsFalse(_mainWindowVM.ValidMazeWidth);
+            _mainWindowVm.MazeWidth = 10;
+            Assert.IsFalse(_mainWindowVm.ValidMazeWidth);
 
-            _mainWindowVM.MazeWidth = 20;
-            Assert.IsTrue(_mainWindowVM.ValidMazeWidth);
+            _mainWindowVm.MazeWidth = 20;
+            Assert.IsTrue(_mainWindowVm.ValidMazeWidth);
         }
 
         [TestMethod]
         public void TestHeightValidation()
         {
-            _mainWindowVM.MazeHeight = 10;
-            Assert.IsFalse(_mainWindowVM.ValidMazeHeight);
+            _mainWindowVm.MazeHeight = 10;
+            Assert.IsFalse(_mainWindowVm.ValidMazeHeight);
 
-            _mainWindowVM.MazeHeight = 20;
-            Assert.IsTrue(_mainWindowVM.ValidMazeHeight);
+            _mainWindowVm.MazeHeight = 20;
+            Assert.IsTrue(_mainWindowVm.ValidMazeHeight);
         }
 
         [TestMethod]
         public void TestDifficultyValidation()
         {
-            _mainWindowVM.MazeDifficulty = "11";
-            Assert.IsFalse(_mainWindowVM.ValidMazeDifficulty);
+            _mainWindowVm.MazeDifficulty = "11";
+            Assert.IsFalse(_mainWindowVm.ValidMazeDifficulty);
 
-            _mainWindowVM.MazeDifficulty = "5";
-            Assert.IsTrue(_mainWindowVM.ValidMazeDifficulty);
+            _mainWindowVm.MazeDifficulty = "5";
+            Assert.IsTrue(_mainWindowVm.ValidMazeDifficulty);
         }
     }
 }

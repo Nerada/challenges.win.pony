@@ -14,27 +14,29 @@ namespace Pony.Rest
 {
     public static class RestHandler
     {
-        public enum RequestType { POST, GET }
-
-        public static string Request(RequestURL action, JObject messageData = null)
+        public enum RequestType
         {
-            if (action == null) { throw new Exception("Request action cannot be null"); }
+            POST,
+            GET
+        }
+
+        public static string Request(RequestUrl action, JObject messageData = null)
+        {
+            if (action == null) throw new Exception("Request action cannot be null");
 
             if (action.RequestType == RequestType.POST)
             {
-                if (messageData == null) { throw new Exception("Cannot send empty POST request"); }
+                if (messageData == null) throw new Exception("Cannot send empty POST request");
 
                 return Request(PostRequest(action.Call, messageData.ToString()));
             }
 
             return Request(GetRequest(action.Call));
-
-            throw new Exception("Unhandled request type");
         }
 
         private static HttpWebRequest GetRequest(Uri url)
         {
-            var request = (HttpWebRequest) WebRequest.Create(url);
+            var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = nameof(RequestType.GET);
 
             return request;
@@ -42,7 +44,7 @@ namespace Pony.Rest
 
         private static HttpWebRequest PostRequest(Uri url, string messageData)
         {
-            var request = (HttpWebRequest) WebRequest.Create(url);
+            var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = nameof(RequestType.POST);
 
             request.ContentType   = "application/json";
@@ -60,9 +62,9 @@ namespace Pony.Rest
 
             try
             {
-                var webResponse    = (HttpWebResponse) request.GetResponse();
+                var webResponse    = (HttpWebResponse)request.GetResponse();
                 var webStream      = webResponse.GetResponseStream();
-                var responseReader = new StreamReader(webStream ?? throw new InvalidOperationException());
+                var responseReader = new StreamReader(webStream);
                 response = responseReader.ReadToEnd();
                 responseReader.Close();
             }
@@ -73,7 +75,9 @@ namespace Pony.Rest
                     throw new WebException("Cannot connect to Trustpilot.");
                 }
 
-                var    resp              = new StreamReader(e.Response.GetResponseStream() ?? throw new InvalidOperationException());
+                if (!(e.Response is {} exResponse)) return null;
+
+                var    resp              = new StreamReader(exResponse.GetResponseStream() ?? throw new InvalidOperationException());
                 string messageFromServer = resp.ReadToEnd();
                 resp.Close();
 

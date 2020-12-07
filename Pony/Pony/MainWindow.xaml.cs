@@ -58,7 +58,7 @@ namespace Pony
         {
             var tb = (TextBox) sender;
 
-            if (!string.IsNullOrEmpty(tb.Text.Trim())) { return; }
+            if (!string.IsNullOrEmpty(tb.Text.Trim())) return;
 
             // Lets get a new random player name just for fun
             if (tb == TxtPlayerName)
@@ -73,7 +73,7 @@ namespace Pony
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) { TxtRestInfo.Focus(); }
+        private void Button_Click(object sender, RoutedEventArgs e) => TxtRestInfo.Focus();
 
         private class PreviousState
         {

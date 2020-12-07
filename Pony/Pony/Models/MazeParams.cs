@@ -30,9 +30,11 @@ namespace Pony.Models
 
         // Without google I wouldn't have guessed any of them.
         // There could be more so lets use this list for random default names.
-        // Too bad there is no "get valid name list" or "validate name" call to tbe API.
+        // Too bad there is no "get valid name list" call to tbe API.
         public static List<string> ConfirmedNames =>
-            new List<string> {
+            new List<string>
+            {
+                // ReSharper disable StringLiteralTypo
                 "Apple Bloom",
                 "Applejack",
                 "Big McIntosh",
@@ -46,6 +48,7 @@ namespace Pony.Models
                 "Spike",
                 "Sweetie Belle",
                 "Twilight Sparkle"
+                // ReSharper restore StringLiteralTypo
             };
 
         public int Width
@@ -54,7 +57,7 @@ namespace Pony.Models
             set
             {
                 _width = value;
-                if (!IsValidSize(value)) { throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_width")); }
+                if (!IsValidSize(value)) throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_width"));
             }
         }
 
@@ -66,7 +69,7 @@ namespace Pony.Models
             set
             {
                 _height = value;
-                if (!IsValidSize(value)) { throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_height")); }
+                if (!IsValidSize(value)) throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_height"));
             }
         }
 
@@ -97,9 +100,9 @@ namespace Pony.Models
 
         public bool IsValid()
         {
-            if (!IsValidSize(_width)) { throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_width")); }
+            if (!IsValidSize(_width)) throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_width"));
 
-            if (!IsValidSize(_height)) { throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_height")); }
+            if (!IsValidSize(_height)) throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_height"));
 
             if (!IsValidDifficulty(_difficulty))
             {
@@ -115,12 +118,12 @@ namespace Pony.Models
 
         public JObject ToJson()
         {
-            var returnJSON = new JObject(new JProperty("maze-width", Width),
+            var returnJson = new JObject(new JProperty("maze-width", Width),
                                          new JProperty("maze-height", Height),
                                          new JProperty("maze-player-name", PlayerName));
-            if (Difficulty != null) { returnJSON.Add("difficulty", Difficulty); }
+            if (Difficulty != null) returnJson.Add("difficulty", Difficulty);
 
-            return returnJSON;
+            return returnJson;
         }
 
         #endregion Functions

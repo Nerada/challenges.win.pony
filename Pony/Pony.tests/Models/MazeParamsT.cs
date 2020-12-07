@@ -16,19 +16,19 @@ namespace Pony.tests.Models
         private MazeParams _mazeParams;
 
         [TestInitialize]
-        public void Initializer() { _mazeParams = new MazeParams(); }
+        public void Initializer() => _mazeParams = new MazeParams();
 
         [TestMethod]
         [ExpectedException(typeof(InvalidInputException))]
-        public void TestInvalidWidth() { _mazeParams.Width = 10; }
+        public void TestInvalidWidth() => _mazeParams.Width = 10;
 
         [TestMethod]
         [ExpectedException(typeof(InvalidInputException))]
-        public void TestInvalidHeight() { _mazeParams.Height = 10; }
+        public void TestInvalidHeight() => _mazeParams.Height = 10;
 
         [TestMethod]
         [ExpectedException(typeof(InvalidInputException))]
-        public void TestInvalidDifficulty() { _mazeParams.Difficulty = 11; }
+        public void TestInvalidDifficulty() => _mazeParams.Difficulty = 11;
 
         [TestMethod]
         public void TestParamsValidation()

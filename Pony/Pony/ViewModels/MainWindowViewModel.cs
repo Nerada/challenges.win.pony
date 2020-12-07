@@ -11,6 +11,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Windows.Input;
 using System.Windows.Media;
+using Newtonsoft.Json.Linq;
 using Pony.Models;
 using Pony.Resources;
 using Pony.Rest;
@@ -37,9 +38,15 @@ namespace Pony.ViewModels
 
         private string _startGameButtonContent = ResourceHandler.GetString("MainWindowViewModel_button_start_game");
 
-        private enum StatusType { Info, Warning, Error }
+        private enum StatusType
+        {
+            Info,
+            Warning,
+            Error
+        }
 
-        private readonly Dictionary<StatusType, Brush> _statusColor = new Dictionary<StatusType, Brush> {
+        private readonly Dictionary<StatusType, Brush> _statusColor = new Dictionary<StatusType, Brush>
+        {
             {StatusType.Info, new SolidColorBrush(Colors.Black)},
             {StatusType.Warning, new SolidColorBrush(Colors.DarkOrange)},
             {StatusType.Error, new SolidColorBrush(Colors.Red)}
@@ -87,7 +94,10 @@ namespace Pony.ViewModels
                     OnPropertyChange(nameof(MazeWidth));
                     SetStatus(StatusType.Info, string.Empty);
                 }
-                catch (InvalidInputException e) { SetStatus(StatusType.Warning, e.Message); }
+                catch (InvalidInputException e)
+                {
+                    SetStatus(StatusType.Warning, e.Message);
+                }
 
                 OnPropertyChange(nameof(ValidMazeWidth));
             }
@@ -106,7 +116,10 @@ namespace Pony.ViewModels
                     OnPropertyChange(nameof(MazeHeight));
                     SetStatus(StatusType.Info, string.Empty);
                 }
-                catch (InvalidInputException e) { SetStatus(StatusType.Warning, e.Message); }
+                catch (InvalidInputException e)
+                {
+                    SetStatus(StatusType.Warning, e.Message);
+                }
 
                 OnPropertyChange(nameof(ValidMazeHeight));
             }
@@ -121,13 +134,15 @@ namespace Pony.ViewModels
             {
                 try
                 {
-                    if (string.IsNullOrEmpty(value)) { _mazeParams.Difficulty = null; }
-                    else { _mazeParams.Difficulty                             = int.Parse(value, CultureInfo.InvariantCulture); }
+                    _mazeParams.Difficulty = string.IsNullOrEmpty(value) ? (int?)null : int.Parse(value, CultureInfo.InvariantCulture);
 
                     OnPropertyChange(nameof(MazeDifficulty));
                     SetStatus(StatusType.Info, string.Empty);
                 }
-                catch (InvalidInputException e) { SetStatus(StatusType.Warning, e.Message); }
+                catch (InvalidInputException e)
+                {
+                    SetStatus(StatusType.Warning, e.Message);
+                }
                 catch (FormatException)
                 {
                     SetStatus(StatusType.Warning, ResourceHandler.GetString("MainWindowViewModel_wrong_difficulty"));
@@ -207,8 +222,7 @@ namespace Pony.ViewModels
 
         private bool CanExecuteWalk { get; set; }
 
-        public ICommand ChangeLanguageCommand =>
-            _changeLanguageCommand ??= new CommandHandler(ChangeLanguageCmd, () => CanExecuteChangeLanguage);
+        public ICommand ChangeLanguageCommand => _changeLanguageCommand ??= new CommandHandler(ChangeLanguageCmd, () => CanExecuteChangeLanguage);
 
         private bool CanExecuteChangeLanguage { get; } = true;
 
@@ -218,7 +232,7 @@ namespace Pony.ViewModels
 
         private void StartGameCmd()
         {
-            if (!_mazeParams.IsValid()) { return; }
+            if (!_mazeParams.IsValid()) return;
 
             RestStatus           = string.Empty;
             CanExecuteWalk       = false;
@@ -227,9 +241,9 @@ namespace Pony.ViewModels
             try
             {
                 SetStatus(StatusType.Info, ResourceHandler.GetString("MainWindowViewModel_info_setting_game"));
-                var requestPayload = _mazeParams.ToJson();
+                JObject requestPayload = _mazeParams.ToJson();
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_creating_maze"), requestPayload.ToString());
-                LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_created_maze"), _restRequestor.CreateMaze(requestPayload));
+                LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_created_maze"),  _restRequestor.CreateMaze(requestPayload));
 
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_get_maze"));
                 MazeStatus = _restRequestor.RetrieveMaze();
@@ -244,7 +258,10 @@ namespace Pony.ViewModels
                 ValidPlayerName = false;
                 SetStatus(StatusType.Error, e.Message);
             }
-            catch (Exception e) { SetStatus(StatusType.Error, e.Message); }
+            catch (Exception e)
+            {
+                SetStatus(StatusType.Error, e.Message);
+            }
 
             Mouse.OverrideCursor = Cursors.Arrow;
         }
@@ -255,9 +272,9 @@ namespace Pony.ViewModels
 
             try
             {
-                LogRestInfo($"{ResourceHandler.GetString("MainWindowViewModel_rest_walk_direction")} {(string) param}");
+                LogRestInfo($"{ResourceHandler.GetString("MainWindowViewModel_rest_walk_direction")} {(string)param}");
 
-                SetStatus(StatusType.Info, _restRequestor.Move((string) param));
+                SetStatus(StatusType.Info, _restRequestor.Move((string)param));
 
                 LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_updating_maze"));
                 MazeStatus = _restRequestor.RetrieveMaze();
@@ -273,7 +290,7 @@ namespace Pony.ViewModels
 
         private void ChangeLanguageCmd(object language)
         {
-            if (Enum.TryParse((string) language, out ResourceHandler.Language selectedLanguage))
+            if (Enum.TryParse((string)language, out ResourceHandler.Language selectedLanguage))
             {
                 ResourceHandler.SetLanguage(selectedLanguage);
 
@@ -301,7 +318,10 @@ namespace Pony.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChange(string propertyName) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName)); }
+        protected void OnPropertyChange(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         #endregion Events
     }

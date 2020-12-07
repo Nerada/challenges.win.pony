@@ -42,6 +42,6 @@ namespace Pony.Support.Dialogs
             Close();
         }
 
-        private void Window_Closing(object sender, CancelEventArgs e) { DialogResult = true; }
+        private void Window_Closing(object sender, CancelEventArgs e) => DialogResult = true;
     }
 }

@@ -11,7 +11,7 @@ using static Pony.Rest.RestHandler;
 
 namespace Pony.Rest
 {
-    public class RequestURL
+    public class RequestUrl
     {
         public enum RestAction
         {
@@ -43,7 +43,7 @@ namespace Pony.Rest
 
         private readonly Uri _urlStart = new Uri("https://ponychallenge.trustpilot.com/pony-challenge/");
 
-        public RequestURL(RestAction action, string mazeId = "")
+        public RequestUrl(RestAction action, string mazeId = "")
         {
             if (action != RestAction.CreateMaze && string.IsNullOrEmpty(mazeId))
             {
