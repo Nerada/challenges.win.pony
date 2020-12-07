@@ -1,0 +1,57 @@
+﻿ <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Authors>Ramon Bollen</Authors>
+    <Company>RamBo</Company>
+    <Description />
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <PackageReleaseNotes />
+  </PropertyGroup>
+
+   <ItemGroup>
+    <EmbeddedResource Update="Resources\zh-CN.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>zh-CN.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\nl-NL.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>nl-NL.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\en-US.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\en-US.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\nl-NL.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>nl-NL.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\zh-CN.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>zh-CN.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+</Project>
