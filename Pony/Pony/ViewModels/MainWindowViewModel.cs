@@ -13,7 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using Newtonsoft.Json.Linq;
 using Pony.Models;
-using Pony.Resources;
+using Pony.Localization;
 using Pony.Rest;
 using Pony.Support;
 
@@ -36,7 +36,7 @@ namespace Pony.ViewModels
 
         private bool _validPlayerName = true;
 
-        private string _startGameButtonContent = ResourceHandler.GetString("MainWindowViewModel_button_start_game");
+        private string _startGameButtonContent = LocalizationHandler.GetString("MainWindowViewModel_button_start_game");
 
         private enum StatusType
         {
@@ -56,11 +56,11 @@ namespace Pony.ViewModels
 
         #region Properties
 
-        public static string WindowTitle         => ResourceHandler.GetString("MainWindowViewModel_window_title");
-        public static string LabelPlayerName     => ResourceHandler.GetString("MainWindowViewModel_label_player_name");
-        public static string LabelMazeWidth      => ResourceHandler.GetString("MainWindowViewModel_label_maze_width");
-        public static string LabelMazeHeight     => ResourceHandler.GetString("MainWindowViewModel_label_maze_height");
-        public static string LabelMazeDifficulty => ResourceHandler.GetString("MainWindowViewModel_label_maze_difficulty");
+        public static string WindowTitle         => LocalizationHandler.GetString("MainWindowViewModel_window_title");
+        public static string LabelPlayerName     => LocalizationHandler.GetString("MainWindowViewModel_label_player_name");
+        public static string LabelMazeWidth      => LocalizationHandler.GetString("MainWindowViewModel_label_maze_width");
+        public static string LabelMazeHeight     => LocalizationHandler.GetString("MainWindowViewModel_label_maze_height");
+        public static string LabelMazeDifficulty => LocalizationHandler.GetString("MainWindowViewModel_label_maze_difficulty");
 
         public string PlayerName
         {
@@ -145,7 +145,7 @@ namespace Pony.ViewModels
                 }
                 catch (FormatException)
                 {
-                    SetStatus(StatusType.Warning, ResourceHandler.GetString("MainWindowViewModel_wrong_difficulty"));
+                    SetStatus(StatusType.Warning, LocalizationHandler.GetString("MainWindowViewModel_wrong_difficulty"));
                 }
 
                 OnPropertyChange(nameof(ValidMazeDifficulty));
@@ -240,18 +240,18 @@ namespace Pony.ViewModels
 
             try
             {
-                SetStatus(StatusType.Info, ResourceHandler.GetString("MainWindowViewModel_info_setting_game"));
+                SetStatus(StatusType.Info, LocalizationHandler.GetString("MainWindowViewModel_info_setting_game"));
                 JObject requestPayload = _mazeParams.ToJson();
-                LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_creating_maze"), requestPayload.ToString());
-                LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_created_maze"),  _restRequestor.CreateMaze(requestPayload));
+                LogRestInfo(LocalizationHandler.GetString("MainWindowViewModel_rest_creating_maze"), requestPayload.ToString());
+                LogRestInfo(LocalizationHandler.GetString("MainWindowViewModel_rest_created_maze"),  _restRequestor.CreateMaze(requestPayload));
 
-                LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_get_maze"));
+                LogRestInfo(LocalizationHandler.GetString("MainWindowViewModel_rest_get_maze"));
                 MazeStatus = _restRequestor.RetrieveMaze();
 
                 CanExecuteWalk = true;
 
-                StartGameButtonContent = ResourceHandler.GetString("MainWindowViewModel_button_new_game");
-                SetStatus(StatusType.Info, ResourceHandler.GetString("MainWindowViewModel_info_ready_game"));
+                StartGameButtonContent = LocalizationHandler.GetString("MainWindowViewModel_button_new_game");
+                SetStatus(StatusType.Info, LocalizationHandler.GetString("MainWindowViewModel_info_ready_game"));
             }
             catch (InvalidPlayerNameException e)
             {
@@ -272,11 +272,11 @@ namespace Pony.ViewModels
 
             try
             {
-                LogRestInfo($"{ResourceHandler.GetString("MainWindowViewModel_rest_walk_direction")} {(string)param}");
+                LogRestInfo($"{LocalizationHandler.GetString("MainWindowViewModel_rest_walk_direction")} {(string)param}");
 
                 SetStatus(StatusType.Info, _restRequestor.Move((string)param));
 
-                LogRestInfo(ResourceHandler.GetString("MainWindowViewModel_rest_updating_maze"));
+                LogRestInfo(LocalizationHandler.GetString("MainWindowViewModel_rest_updating_maze"));
                 MazeStatus = _restRequestor.RetrieveMaze();
             }
             catch (Exception e)
@@ -290,9 +290,9 @@ namespace Pony.ViewModels
 
         private void ChangeLanguageCmd(object language)
         {
-            if (Enum.TryParse((string)language, out ResourceHandler.Language selectedLanguage))
+            if (Enum.TryParse((string)language, out LocalizationHandler.Language selectedLanguage))
             {
-                ResourceHandler.SetLanguage(selectedLanguage);
+                LocalizationHandler.SetLanguage(selectedLanguage);
 
                 var properties = new List<PropertyInfo>(typeof(MainWindowViewModel).GetProperties());
                 properties.ForEach(p => OnPropertyChange(nameof(p)));

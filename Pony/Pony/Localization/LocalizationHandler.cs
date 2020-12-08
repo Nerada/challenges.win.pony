@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
-//       File: Pony.ResourceHandler.cs
+//       File: Pony.LocalizationHandler.cs
 // Created on: 20191005
 // -----------------------------------------------
 
@@ -9,12 +9,12 @@ using System.Globalization;
 using System.Reflection;
 using System.Resources;
 
-namespace Pony.Resources
+namespace Pony.Localization
 {
     /// <summary>
     ///     Class for handling languages
     /// </summary>
-    public static class ResourceHandler
+    public static class LocalizationHandler
     {
         public enum Language
         {
@@ -27,7 +27,7 @@ namespace Pony.Resources
         private static ResourceManager _resMrg;
         private static CultureInfo     _cul;
 
-        static ResourceHandler() => SetLanguage(Language.English);
+        static LocalizationHandler() => SetLanguage(Language.English);
 
         public static Dictionary<Language, string> Languages { get; } = new Dictionary<Language, string>
         {

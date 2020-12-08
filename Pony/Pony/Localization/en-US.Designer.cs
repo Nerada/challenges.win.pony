@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Pony.Resources {
+namespace Pony.Localization {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace Pony.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class nl_NL {
+    public class en_US {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal nl_NL() {
+        internal en_US() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace Pony.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Pony.Resources.nl-NL", typeof(nl_NL).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Pony.Localization.en-US", typeof(en_US).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start nieuw spel.
+        ///   Looks up a localized string similar to Start new game.
         /// </summary>
         public static string MainWindowViewModel_button_new_game {
             get {
@@ -70,7 +70,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start spel.
+        ///   Looks up a localized string similar to Start game.
         /// </summary>
         public static string MainWindowViewModel_button_start_game {
             get {
@@ -79,7 +79,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Klaar om the spelen! Gebruik de pijltoetsen of [W,S,A,D] om the bewegen. Jij bent P, je moet naar E gaan zonder dat D jou weet te vinden!.
+        ///   Looks up a localized string similar to Ready to play! Use the arrow keys or [W,S,A,D] to move. You are P, go to E but don&apos;t let D get to you!.
         /// </summary>
         public static string MainWindowViewModel_info_ready_game {
             get {
@@ -88,7 +88,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Spel aan het voorbereiden.
+        ///   Looks up a localized string similar to Setting up game...
         /// </summary>
         public static string MainWindowViewModel_info_setting_game {
             get {
@@ -97,7 +97,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moeilijkheid:.
+        ///   Looks up a localized string similar to Difficulty:.
         /// </summary>
         public static string MainWindowViewModel_label_maze_difficulty {
             get {
@@ -106,7 +106,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hoogte:.
+        ///   Looks up a localized string similar to Height:.
         /// </summary>
         public static string MainWindowViewModel_label_maze_height {
             get {
@@ -115,7 +115,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Doolhof breedte:.
+        ///   Looks up a localized string similar to Maze Width:.
         /// </summary>
         public static string MainWindowViewModel_label_maze_width {
             get {
@@ -124,7 +124,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Speler naam:.
+        ///   Looks up a localized string similar to Player Name:.
         /// </summary>
         public static string MainWindowViewModel_label_player_name {
             get {
@@ -133,7 +133,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Doolhof gemaakt.
+        ///   Looks up a localized string similar to Maze created.
         /// </summary>
         public static string MainWindowViewModel_rest_created_maze {
             get {
@@ -142,7 +142,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Doolhof aan het maken.
+        ///   Looks up a localized string similar to Creating maze.
         /// </summary>
         public static string MainWindowViewModel_rest_creating_maze {
             get {
@@ -151,7 +151,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Doolhof ophalen.
+        ///   Looks up a localized string similar to Retrieving the Maze.
         /// </summary>
         public static string MainWindowViewModel_rest_get_maze {
             get {
@@ -160,7 +160,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Doolhof vernieuwen.
+        ///   Looks up a localized string similar to Updating the Maze.
         /// </summary>
         public static string MainWindowViewModel_rest_updating_maze {
             get {
@@ -169,7 +169,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Loop in richting.
+        ///   Looks up a localized string similar to Walk in direction.
         /// </summary>
         public static string MainWindowViewModel_rest_walk_direction {
             get {
@@ -178,7 +178,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Het pony spel.
+        ///   Looks up a localized string similar to The pony game.
         /// </summary>
         public static string MainWindowViewModel_window_title {
             get {
@@ -187,7 +187,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moeilijkheid moet een getal zijn..
+        ///   Looks up a localized string similar to Difficulty has to be a number..
         /// </summary>
         public static string MainWindowViewModel_wrong_difficulty {
             get {
@@ -196,7 +196,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Moeilijkheid moet tussen de 0 en de 10 liggen..
+        ///   Looks up a localized string similar to Difficulty should be between 0 and 10..
         /// </summary>
         public static string MazeParams_wrong_difficulty {
             get {
@@ -205,7 +205,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Hoogte moet tussen de 15 en 25 zitten..
+        ///   Looks up a localized string similar to Height should be between 15 and 25..
         /// </summary>
         public static string MazeParams_wrong_height {
             get {
@@ -214,7 +214,7 @@ namespace Pony.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Breedte moet tussen de 15 en 25 zitten..
+        ///   Looks up a localized string similar to Width should be between 15 and 25..
         /// </summary>
         public static string MazeParams_wrong_width {
             get {

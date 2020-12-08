@@ -6,7 +6,7 @@
 
 using System;
 using System.Collections.Generic;
-using Pony.Resources;
+using Pony.Localization;
 using Pony.Support;
 using Newtonsoft.Json.Linq;
 
@@ -57,7 +57,7 @@ namespace Pony.Models
             set
             {
                 _width = value;
-                if (!IsValidSize(value)) throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_width"));
+                if (!IsValidSize(value)) throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_width"));
             }
         }
 
@@ -69,7 +69,7 @@ namespace Pony.Models
             set
             {
                 _height = value;
-                if (!IsValidSize(value)) throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_height"));
+                if (!IsValidSize(value)) throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_height"));
             }
         }
 
@@ -85,7 +85,7 @@ namespace Pony.Models
                 _difficulty = value;
                 if (!IsValidDifficulty(value))
                 {
-                    throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_difficulty"));
+                    throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_difficulty"));
                 }
             }
         }
@@ -100,13 +100,13 @@ namespace Pony.Models
 
         public bool IsValid()
         {
-            if (!IsValidSize(_width)) throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_width"));
+            if (!IsValidSize(_width)) throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_width"));
 
-            if (!IsValidSize(_height)) throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_height"));
+            if (!IsValidSize(_height)) throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_height"));
 
             if (!IsValidDifficulty(_difficulty))
             {
-                throw new InvalidInputException(ResourceHandler.GetString("MazeParams_wrong_difficulty"));
+                throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_difficulty"));
             }
 
             return true;

@@ -6,7 +6,7 @@
 
 using System.ComponentModel;
 using System.Windows;
-using Pony.Resources;
+using Pony.Localization;
 
 namespace Pony.Support.Dialogs
 {
@@ -23,21 +23,21 @@ namespace Pony.Support.Dialogs
 
         private void EnglishButton_Click(object sender, RoutedEventArgs e)
         {
-            ResourceHandler.SetLanguage(ResourceHandler.Language.English);
+            LocalizationHandler.SetLanguage(LocalizationHandler.Language.English);
             DialogResult = true;
             Close();
         }
 
         private void DutchButton_Click(object sender, RoutedEventArgs e)
         {
-            ResourceHandler.SetLanguage(ResourceHandler.Language.Dutch);
+            LocalizationHandler.SetLanguage(LocalizationHandler.Language.Dutch);
             DialogResult = true;
             Close();
         }
 
         private void ChineseButton_Click(object sender, RoutedEventArgs e)
         {
-            ResourceHandler.SetLanguage(ResourceHandler.Language.Chinese);
+            LocalizationHandler.SetLanguage(LocalizationHandler.Language.Chinese);
             DialogResult = true;
             Close();
         }
