@@ -5,7 +5,6 @@
     <UseWPF>true</UseWPF>
     <Authors>Ramon Bollen</Authors>
     <Company>RamBo</Company>
-    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\zh-CN.resx">
