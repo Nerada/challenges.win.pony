@@ -1,6 +1,6 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
-//       File: Pony.RequestURL.cs
+//       File: Pony.RequestUrl.cs
 // Created on: 20191014
 // -----------------------------------------------
 
