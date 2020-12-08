@@ -1,5 +1,4 @@
-﻿ <Project Sdk="Microsoft.NET.Sdk">
-
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
@@ -10,7 +9,6 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <PackageReleaseNotes />
   </PropertyGroup>
-
    <ItemGroup>
     <EmbeddedResource Update="Resources\zh-CN.resx">
       <SubType>Designer</SubType>
@@ -27,15 +25,9 @@
       <LastGenOutput>en-US.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Resources\en-US.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -53,5 +45,4 @@
       <DependentUpon>zh-CN.resx</DependentUpon>
     </Compile>
   </ItemGroup>
-
 </Project>
