@@ -5,11 +5,9 @@
     <UseWPF>true</UseWPF>
     <Authors>Ramon Bollen</Authors>
     <Company>RamBo</Company>
-    <Description />
     <NeutralLanguage>en-US</NeutralLanguage>
-    <PackageReleaseNotes />
   </PropertyGroup>
-   <ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Update="Resources\zh-CN.resx">
       <SubType>Designer</SubType>
       <LastGenOutput>zh-CN.Designer.cs</LastGenOutput>
