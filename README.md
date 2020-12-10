@@ -1,4 +1,4 @@
-# Pony Challenge API
+# Pony Challenge API [![Build Status](https://dev.azure.com/nerada/GitHub/_apis/build/status/Nerada.challenges_pony?branchName=master)](https://dev.azure.com/nerada/GitHub/_build/latest?definitionId=6&branchName=master)
 https://ponychallenge.trustpilot.com/index.html
 
 ### Help the pony escape the Domokun!
