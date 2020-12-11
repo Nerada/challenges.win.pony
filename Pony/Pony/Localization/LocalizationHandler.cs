@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
-//       File: Pony.LocalizationHandler.cs
-// Created on: 20191005
+//      File: Pony.LocalizationHandler.cs
+// Created on: 20201211
 // -----------------------------------------------
 
 using System.Collections.Generic;

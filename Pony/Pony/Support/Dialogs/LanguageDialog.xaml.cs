@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
-//       File: Pony.LanguageDialog.xaml.cs
-// Created on: 20191006
+//      File: Pony.LanguageDialog.xaml.cs
+// Created on: 20201211
 // -----------------------------------------------
 
 using System.ComponentModel;

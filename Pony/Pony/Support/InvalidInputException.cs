@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
-//       File: Pony.InvalidInputException.cs
-// Created on: 20191004
+//      File: Pony.InvalidInputException.cs
+// Created on: 20201211
 // -----------------------------------------------
 
 using System;

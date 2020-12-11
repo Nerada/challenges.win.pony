@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
-//       File: Pony.MainWindowViewModel.cs
-// Created on: 20191004
+//      File: Pony.MainWindowViewModel.cs
+// Created on: 20201211
 // -----------------------------------------------
 
 using System;

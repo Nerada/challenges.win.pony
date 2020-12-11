@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
-//       File: Pony.App.xaml.cs
-// Created on: 20190927
+//      File: Pony.App.xaml.cs
+// Created on: 20201211
 // -----------------------------------------------
 
 using System.Windows;

@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
-//       File: Pony.MazeParams.cs
-// Created on: 20191004
+//      File: Pony.MazeParams.cs
+// Created on: 20201211
 // -----------------------------------------------
 
 using System;
@@ -118,8 +118,8 @@ namespace Pony.Models
 
         public JObject ToJson()
         {
-            var returnJson = new JObject(new JProperty("maze-width", Width),
-                                         new JProperty("maze-height", Height),
+            var returnJson = new JObject(new JProperty("maze-width",       Width),
+                                         new JProperty("maze-height",      Height),
                                          new JProperty("maze-player-name", PlayerName));
             if (Difficulty != null) returnJson.Add("difficulty", Difficulty);
 

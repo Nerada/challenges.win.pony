@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
-//       File: Pony.MainWindow.xaml.cs
-// Created on: 20190927
+//      File: Pony.MainWindow.xaml.cs
+// Created on: 20201211
 // -----------------------------------------------
 
 using System;
@@ -42,7 +42,7 @@ namespace Pony
 
         private void DefaultTextBox_Enter(object sender, EventArgs e)
         {
-            var tb = (TextBox) sender;
+            var tb = (TextBox)sender;
 
             if (!string.IsNullOrEmpty(tb.Text))
             {
@@ -56,7 +56,7 @@ namespace Pony
 
         private void DefaultTextBox_Leave(object sender, EventArgs e)
         {
-            var tb = (TextBox) sender;
+            var tb = (TextBox)sender;
 
             if (!string.IsNullOrEmpty(tb.Text.Trim())) return;
 
