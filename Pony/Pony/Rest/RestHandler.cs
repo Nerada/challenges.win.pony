@@ -75,7 +75,7 @@ namespace Pony.Rest
                     throw new WebException("Cannot connect to Trustpilot.");
                 }
 
-                if (!(e.Response is {} exResponse)) return null;
+                if (!(e.Response is { } exResponse)) return null;
 
                 var    resp              = new StreamReader(exResponse.GetResponseStream() ?? throw new InvalidOperationException());
                 string messageFromServer = resp.ReadToEnd();

@@ -67,7 +67,7 @@ namespace Pony.Rest
                 {
                     var hiddenUrl = JObject.Parse(response).SelectToken("hidden-url")?.ToString();
 
-                    if (!(hiddenUrl is {} url)) return null;
+                    if (!(hiddenUrl is { } url)) return null;
 
                     string fileName = url.Substring(0, url.LastIndexOf('.'))
                                          .Replace(@"/", "", StringComparison.InvariantCulture);

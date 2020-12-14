@@ -8,12 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Reflection;
 using System.Windows.Input;
 using System.Windows.Media;
 using Newtonsoft.Json.Linq;
-using Pony.Models;
 using Pony.Localization;
+using Pony.Models;
 using Pony.Rest;
 using Pony.Support;
 
@@ -23,8 +22,8 @@ namespace Pony.ViewModels
     {
         #region Fields
 
-        private readonly MazeParams    _mazeParams    = new MazeParams();
-        private readonly RestRequestor _restRequestor = new RestRequestor();
+        private readonly MazeParams    _mazeParams    = new();
+        private readonly RestRequestor _restRequestor = new();
 
         private ICommand _clickCommand;
         private ICommand _walkCommand;
@@ -45,7 +44,7 @@ namespace Pony.ViewModels
             Error
         }
 
-        private readonly Dictionary<StatusType, Brush> _statusColor = new Dictionary<StatusType, Brush>
+        private readonly Dictionary<StatusType, Brush> _statusColor = new()
         {
             {StatusType.Info, new SolidColorBrush(Colors.Black)},
             {StatusType.Warning, new SolidColorBrush(Colors.DarkOrange)},
@@ -199,7 +198,7 @@ namespace Pony.ViewModels
             }
         }
 
-        public ICommand StartGameCommand => _clickCommand ??= new CommandHandler(param => StartGameCmd(), () => CanExecuteStartGame);
+        public ICommand StartGameCommand => _clickCommand ??= new CommandHandler(_ => StartGameCmd(), () => CanExecuteStartGame);
 
         private bool CanExecuteStartGame
         {
@@ -294,8 +293,8 @@ namespace Pony.ViewModels
             {
                 LocalizationHandler.SetLanguage(selectedLanguage);
 
-                var properties = new List<PropertyInfo>(typeof(MainWindowViewModel).GetProperties());
-                properties.ForEach(p => OnPropertyChange(nameof(p)));
+                // You can indicate all properties have changed by using null or string.Empty for the property name in PropertyChangedEventArgs.
+                OnPropertyChange(string.Empty);
             }
         }
 

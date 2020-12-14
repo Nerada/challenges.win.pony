@@ -29,7 +29,7 @@ namespace Pony.Localization
 
         static LocalizationHandler() => SetLanguage(Language.English);
 
-        public static Dictionary<Language, string> Languages { get; } = new Dictionary<Language, string>
+        public static Dictionary<Language, string> Languages { get; } = new()
         {
             {Language.English, "en-US"}, {Language.Dutch, "nl-NL"}, {Language.Chinese, "zh-cn"}
         };
@@ -43,7 +43,7 @@ namespace Pony.Localization
 
         public static void SetLanguage(Language lang)
         {
-            _dictionaryName = $"{Assembly.GetExecutingAssembly().GetName().Name}.Resources.{Languages[lang]}";
+            _dictionaryName = $"{Assembly.GetExecutingAssembly().GetName().Name}.Localization.{Languages[lang]}";
             _resMrg         = new ResourceManager(_dictionaryName, Assembly.GetExecutingAssembly());
             _cul            = new CultureInfo(Languages[lang]);
         }
