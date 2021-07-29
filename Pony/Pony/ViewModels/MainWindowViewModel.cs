@@ -133,7 +133,7 @@ namespace Pony.ViewModels
             {
                 try
                 {
-                    _mazeParams.Difficulty = string.IsNullOrEmpty(value) ? (int?)null : int.Parse(value, CultureInfo.InvariantCulture);
+                    _mazeParams.Difficulty = string.IsNullOrEmpty(value) ? null : int.Parse(value, CultureInfo.InvariantCulture);
 
                     OnPropertyChange(nameof(MazeDifficulty));
                     SetStatus(StatusType.Info, string.Empty);
