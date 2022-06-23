@@ -46,9 +46,9 @@ namespace Pony.ViewModels
 
         private readonly Dictionary<StatusType, Brush> _statusColor = new()
         {
-            { StatusType.Info, new SolidColorBrush(Colors.Black) },
-            { StatusType.Warning, new SolidColorBrush(Colors.DarkOrange) },
-            { StatusType.Error, new SolidColorBrush(Colors.Red) }
+            {StatusType.Info, new SolidColorBrush(Colors.Black)},
+            {StatusType.Warning, new SolidColorBrush(Colors.DarkOrange)},
+            {StatusType.Error, new SolidColorBrush(Colors.Red)}
         };
 
         #endregion Fields
@@ -231,7 +231,10 @@ namespace Pony.ViewModels
 
         private void StartGameCmd()
         {
-            if (!_mazeParams.IsValid()) return;
+            if (!_mazeParams.IsValid())
+            {
+                return;
+            }
 
             RestStatus           = string.Empty;
             CanExecuteWalk       = false;
@@ -317,10 +320,7 @@ namespace Pony.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected void OnPropertyChange(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        protected void OnPropertyChange(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
         #endregion Events
     }

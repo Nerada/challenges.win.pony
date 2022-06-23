@@ -5,19 +5,19 @@
 // -----------------------------------------------
 
 using System.Net;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Linq;
 using Pony.Models;
 using Pony.Rest;
 using Pony.Support;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json.Linq;
 
 namespace Pony.tests.Rest
 {
     [TestClass]
     public class RestAnalyzerT
     {
-        private readonly MazeParams    _params       = new MazeParams();
-        private readonly RestRequestor _restAnalyzer = new RestRequestor();
+        private readonly MazeParams    _params       = new();
+        private readonly RestRequestor _restAnalyzer = new();
 
         [TestInitialize]
         public void Initializer()

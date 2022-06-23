@@ -20,7 +20,7 @@ namespace Pony.Support
             Debug.Assert(InternalChildren.Count == 1);
             UIElement child = InternalChildren[0];
 
-            var panelDesiredSize = new Size
+            Size panelDesiredSize = new()
             {
                 // panelDesiredSize.Width = availableSize.Width;
                 Width = (double)child.GetValue(MinWidthProperty), Height = (double)child.GetValue(MinHeightProperty)
@@ -39,9 +39,15 @@ namespace Pony.Support
 
             child.Arrange(new Rect(0, 0, finalSize.Width, finalSize.Height));
 
-            if (finalSize.Width > child.RenderSize.Width) finalSize.Width = child.RenderSize.Width;
+            if (finalSize.Width > child.RenderSize.Width)
+            {
+                finalSize.Width = child.RenderSize.Width;
+            }
 
-            if (finalSize.Height > child.RenderSize.Height) finalSize.Height = child.RenderSize.Height;
+            if (finalSize.Height > child.RenderSize.Height)
+            {
+                finalSize.Height = child.RenderSize.Height;
+            }
 
             return finalSize; // Returns the final Arranged size
         }

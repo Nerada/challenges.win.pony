@@ -22,11 +22,17 @@ namespace Pony.Rest
 
         public static string Request(RequestUrl action, JObject messageData = null)
         {
-            if (action == null) throw new Exception("Request action cannot be null");
+            if (action == null)
+            {
+                throw new Exception("Request action cannot be null");
+            }
 
             if (action.RequestType == RequestType.POST)
             {
-                if (messageData == null) throw new Exception("Cannot send empty POST request");
+                if (messageData == null)
+                {
+                    throw new Exception("Cannot send empty POST request");
+                }
 
                 return Request(PostRequest(action.Call, messageData.ToString()));
             }
@@ -36,7 +42,7 @@ namespace Pony.Rest
 
         private static HttpWebRequest GetRequest(Uri url)
         {
-            var request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = nameof(RequestType.GET);
 
             return request;
@@ -44,12 +50,12 @@ namespace Pony.Rest
 
         private static HttpWebRequest PostRequest(Uri url, string messageData)
         {
-            var request = (HttpWebRequest)WebRequest.Create(url);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = nameof(RequestType.POST);
 
             request.ContentType   = "application/json";
             request.ContentLength = messageData.Length;
-            var requestWriter = new StreamWriter(request.GetRequestStream(), Encoding.ASCII);
+            StreamWriter requestWriter = new(request.GetRequestStream(), Encoding.ASCII);
             requestWriter.Write(messageData);
             requestWriter.Close();
 
@@ -58,27 +64,33 @@ namespace Pony.Rest
 
         private static string Request(HttpWebRequest request)
         {
-            string response;
+            string response = string.Empty;
 
             try
             {
-                var webResponse    = (HttpWebResponse)request.GetResponse();
-                var webStream      = webResponse.GetResponseStream();
-                var responseReader = new StreamReader(webStream);
-                response = responseReader.ReadToEnd();
-                responseReader.Close();
+                HttpWebResponse webResponse = (HttpWebResponse)request.GetResponse();
+                Stream          webStream   = webResponse.GetResponseStream();
+                if (webStream != null)
+                {
+                    StreamReader responseReader = new(webStream);
+                    response = responseReader.ReadToEnd();
+                    responseReader.Close();
+                }
             }
             catch (WebException e)
             {
                 if (e.InnerException?.Message == "No such host is known.")
                 {
-                    throw new WebException("Cannot connect to Trustpilot.");
+                    throw new WebException("Cannot connect to remote host.");
                 }
 
-                if (!(e.Response is { } exResponse)) return null;
+                if (!(e.Response is { } exResponse))
+                {
+                    return null;
+                }
 
-                var    resp              = new StreamReader(exResponse.GetResponseStream() ?? throw new InvalidOperationException());
-                string messageFromServer = resp.ReadToEnd();
+                StreamReader resp              = new(exResponse.GetResponseStream() ?? throw new InvalidOperationException());
+                string       messageFromServer = resp.ReadToEnd();
                 resp.Close();
 
                 throw new WebException($"{messageFromServer}");

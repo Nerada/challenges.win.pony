@@ -21,27 +21,27 @@ namespace Pony.Rest
             GetMaze
         }
 
-        private readonly Dictionary<RestAction, string> _calls = new Dictionary<RestAction, string>
+        private readonly Dictionary<RestAction, string> _calls = new()
         {
-            { RestAction.CreateMaze, "maze" },
-            { RestAction.GetMazeState, "maze/{0}" },
-            { RestAction.NextMove, "maze/{0}" },
-            { RestAction.GetMaze, "maze/{0}/print" }
+            {RestAction.CreateMaze, "maze"},
+            {RestAction.GetMazeState, "maze/{0}"},
+            {RestAction.NextMove, "maze/{0}"},
+            {RestAction.GetMaze, "maze/{0}/print"}
         };
 
         private readonly RestAction _chosenAction;
 
         private readonly string _mazeId;
 
-        private readonly Dictionary<RestAction, RequestType> _type = new Dictionary<RestAction, RequestType>
+        private readonly Dictionary<RestAction, RequestType> _type = new()
         {
-            { RestAction.CreateMaze, RequestType.POST },
-            { RestAction.GetMazeState, RequestType.GET },
-            { RestAction.NextMove, RequestType.POST },
-            { RestAction.GetMaze, RequestType.GET }
+            {RestAction.CreateMaze, RequestType.POST},
+            {RestAction.GetMazeState, RequestType.GET},
+            {RestAction.NextMove, RequestType.POST},
+            {RestAction.GetMaze, RequestType.GET}
         };
 
-        private readonly Uri _urlStart = new Uri("https://ponychallenge.trustpilot.com/pony-challenge/");
+        private readonly Uri _urlStart = new("https://ponychallenge.trustpilot.com/pony-challenge/");
 
         public RequestUrl(RestAction action, string mazeId = "")
         {
@@ -54,7 +54,7 @@ namespace Pony.Rest
             _mazeId       = mazeId;
         }
 
-        public Uri Call => new Uri(_urlStart, string.Format(CultureInfo.InvariantCulture, _calls[_chosenAction], _mazeId));
+        public Uri Call => new(_urlStart, string.Format(CultureInfo.InvariantCulture, _calls[_chosenAction], _mazeId));
 
         public RequestType RequestType => _type[_chosenAction];
     }

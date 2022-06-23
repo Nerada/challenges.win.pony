@@ -6,9 +6,9 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using Pony.Localization;
 using Pony.Support;
-using Newtonsoft.Json.Linq;
 
 namespace Pony.Models
 {
@@ -22,7 +22,7 @@ namespace Pony.Models
         private                 int    _width  = 20;
         private                 int    _height = 20;
         private                 int?   _difficulty;
-        private static readonly Random Random = new Random();
+        private static readonly Random Random = new();
 
         #endregion Fields
 
@@ -32,7 +32,7 @@ namespace Pony.Models
         // There could be more so lets use this list for random default names.
         // Too bad there is no "get valid name list" call to tbe API.
         public static List<string> ConfirmedNames =>
-            new List<string>
+            new()
             {
                 // ReSharper disable StringLiteralTypo
                 "Apple Bloom",
@@ -57,7 +57,10 @@ namespace Pony.Models
             set
             {
                 _width = value;
-                if (!IsValidSize(value)) throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_width"));
+                if (!IsValidSize(value))
+                {
+                    throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_width"));
+                }
             }
         }
 
@@ -69,7 +72,10 @@ namespace Pony.Models
             set
             {
                 _height = value;
-                if (!IsValidSize(value)) throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_height"));
+                if (!IsValidSize(value))
+                {
+                    throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_height"));
+                }
             }
         }
 
@@ -100,9 +106,15 @@ namespace Pony.Models
 
         public bool IsValid()
         {
-            if (!IsValidSize(_width)) throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_width"));
+            if (!IsValidSize(_width))
+            {
+                throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_width"));
+            }
 
-            if (!IsValidSize(_height)) throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_height"));
+            if (!IsValidSize(_height))
+            {
+                throw new InvalidInputException(LocalizationHandler.GetString("MazeParams_wrong_height"));
+            }
 
             if (!IsValidDifficulty(_difficulty))
             {
@@ -114,14 +126,17 @@ namespace Pony.Models
 
         private static bool IsValidSize(int size) => size >= 15 && size <= 25;
 
-        private static bool IsValidDifficulty(int? dif) => dif == null || (dif >= 0 && dif <= 10);
+        private static bool IsValidDifficulty(int? dif) => dif == null || dif >= 0 && dif <= 10;
 
         public JObject ToJson()
         {
-            var returnJson = new JObject(new JProperty("maze-width",       Width),
-                                         new JProperty("maze-height",      Height),
-                                         new JProperty("maze-player-name", PlayerName));
-            if (Difficulty != null) returnJson.Add("difficulty", Difficulty);
+            JObject returnJson = new(new JProperty("maze-width",       Width),
+                                     new JProperty("maze-height",      Height),
+                                     new JProperty("maze-player-name", PlayerName));
+            if (Difficulty != null)
+            {
+                returnJson.Add("difficulty", Difficulty);
+            }
 
             return returnJson;
         }

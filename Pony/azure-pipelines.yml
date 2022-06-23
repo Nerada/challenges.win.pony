@@ -26,4 +26,5 @@ stages:
       solutionName: 'Pony'
       buildPlatform: 'Any CPU'
       buildConfiguration: 'Release'
+      buildFolderName: 'bin'
       version: '0.1.0.$(Build.BuildId)'

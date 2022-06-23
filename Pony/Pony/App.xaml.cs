@@ -19,12 +19,12 @@ namespace Pony
             //Disable shutdown when the dialog closes
             Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
 
-            var dialog = new LanguageDialog();
+            LanguageDialog dialog = new();
             dialog.ShowDialog();
 
             if (dialog.DialogResult == true)
             {
-                var mainWindow = new MainWindow();
+                MainWindow mainWindow = new();
                 //Re-enable normal shutdown mode.
                 Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
                 Current.MainWindow   = mainWindow;

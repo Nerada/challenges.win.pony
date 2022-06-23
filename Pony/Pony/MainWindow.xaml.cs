@@ -18,18 +18,18 @@ namespace Pony
     /// </summary>
     public partial class MainWindow
     {
-        private readonly SolidColorBrush _black = new SolidColorBrush(Colors.Black);
-        private readonly SolidColorBrush _gray  = new SolidColorBrush(Colors.Gray);
+        private readonly SolidColorBrush _black = new(Colors.Black);
+        private readonly SolidColorBrush _gray  = new(Colors.Gray);
 
-        private readonly Dictionary<TextBox, PreviousState> _previousValues = new Dictionary<TextBox, PreviousState>();
+        private readonly Dictionary<TextBox, PreviousState> _previousValues = new();
 
         public MainWindow()
         {
             InitializeComponent();
-            var viewModel = new MainWindowViewModel();
+            MainWindowViewModel viewModel = new();
             DataContext = viewModel;
 
-            var textboxes = new List<TextBox> {TxtPlayerName, TxtWidth, TxtHeight, TxtDifficulty};
+            List<TextBox> textboxes = new() {TxtPlayerName, TxtWidth, TxtHeight, TxtDifficulty};
             textboxes.ForEach(tb =>
             {
                 tb.Foreground = _gray;
@@ -42,7 +42,7 @@ namespace Pony
 
         private void DefaultTextBox_Enter(object sender, EventArgs e)
         {
-            var tb = (TextBox)sender;
+            TextBox tb = (TextBox)sender;
 
             if (!string.IsNullOrEmpty(tb.Text))
             {
@@ -56,9 +56,12 @@ namespace Pony
 
         private void DefaultTextBox_Leave(object sender, EventArgs e)
         {
-            var tb = (TextBox)sender;
+            TextBox tb = (TextBox)sender;
 
-            if (!string.IsNullOrEmpty(tb.Text.Trim())) return;
+            if (!string.IsNullOrEmpty(tb.Text.Trim()))
+            {
+                return;
+            }
 
             // Lets get a new random player name just for fun
             if (tb == TxtPlayerName)

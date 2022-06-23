@@ -7,8 +7,8 @@
 using System;
 using System.Net;
 using System.Text;
-using Pony.Support;
 using Newtonsoft.Json.Linq;
+using Pony.Support;
 
 namespace Pony.Rest
 {
@@ -21,19 +21,25 @@ namespace Pony.Rest
 
         public string CreateMaze(JObject payload)
         {
-            if (payload == null) throw new Exception("Cannot call function without payload");
+            if (payload == null)
+            {
+                throw new Exception("Cannot call function without payload");
+            }
 
             try
             {
                 string response = RestHandler.Request(new RequestUrl(RequestUrl.RestAction.CreateMaze), payload);
 
                 _mazeId = JObject.Parse(response).Value<string>("maze_id");
-                var createReturn = JObject.Parse(response);
+                JObject createReturn = JObject.Parse(response);
                 return createReturn.ToString();
             }
             catch (WebException e)
             {
-                if (e.Message == "Only ponies can play") throw new InvalidPlayerNameException(e.Message);
+                if (e.Message == "Only ponies can play")
+                {
+                    throw new InvalidPlayerNameException(e.Message);
+                }
 
                 throw new WebException(e.Message);
             }
@@ -41,16 +47,22 @@ namespace Pony.Rest
 
         public string RetrieveMaze()
         {
-            if (string.IsNullOrEmpty(_mazeId)) throw new Exception("Create a maze first!");
+            if (string.IsNullOrEmpty(_mazeId))
+            {
+                throw new Exception("Create a maze first!");
+            }
 
             return RestHandler.Request(new RequestUrl(RequestUrl.RestAction.GetMaze, _mazeId));
         }
 
         public string Move(string direction)
         {
-            if (string.IsNullOrEmpty(_mazeId)) throw new Exception("Create a maze first!");
+            if (string.IsNullOrEmpty(_mazeId))
+            {
+                throw new Exception("Create a maze first!");
+            }
 
-            var directionPayload = new JObject { { "direction", direction } };
+            JObject directionPayload = new() {{"direction", direction}};
 
             string response = RestHandler.Request(new RequestUrl(RequestUrl.RestAction.NextMove, _mazeId), directionPayload);
 
@@ -61,13 +73,16 @@ namespace Pony.Rest
         {
             try
             {
-                var state = JObject.Parse(response).SelectToken("state")?.ToString();
+                string state = JObject.Parse(response).SelectToken("state")?.ToString();
 
                 if (state == "won" || state == "over")
                 {
-                    var hiddenUrl = JObject.Parse(response).SelectToken("hidden-url")?.ToString();
+                    string hiddenUrl = JObject.Parse(response).SelectToken("hidden-url")?.ToString();
 
-                    if (!(hiddenUrl is { } url)) return null;
+                    if (!(hiddenUrl is { } url))
+                    {
+                        return null;
+                    }
 
                     string fileName = url.Substring(0, url.LastIndexOf('.'))
                                          .Replace(@"/", "", StringComparison.InvariantCulture);

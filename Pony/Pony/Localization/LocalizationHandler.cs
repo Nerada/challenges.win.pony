@@ -27,11 +27,14 @@ namespace Pony.Localization
         private static ResourceManager _resMrg;
         private static CultureInfo     _cul;
 
-        static LocalizationHandler() => SetLanguage(Language.English);
+        static LocalizationHandler()
+        {
+            SetLanguage(Language.English);
+        }
 
         public static Dictionary<Language, string> Languages { get; } = new()
         {
-            { Language.English, "en-US" }, { Language.Dutch, "nl-NL" }, { Language.Chinese, "zh-cn" }
+            {Language.English, "en-US"}, {Language.Dutch, "nl-NL"}, {Language.Chinese, "zh-cn"}
         };
 
         /// <summary>
