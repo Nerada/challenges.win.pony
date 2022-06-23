@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
 //      File: Pony.LocalizationHandler.cs
-// Created on: 20201211
+// Created on: 20210729
 // -----------------------------------------------
 
 using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace Pony.Localization
 
         public static Dictionary<Language, string> Languages { get; } = new()
         {
-            {Language.English, "en-US"}, {Language.Dutch, "nl-NL"}, {Language.Chinese, "zh-cn"}
+            { Language.English, "en-US" }, { Language.Dutch, "nl-NL" }, { Language.Chinese, "zh-cn" }
         };
 
         /// <summary>

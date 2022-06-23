@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
 //      File: Pony.RequestUrl.cs
-// Created on: 20201211
+// Created on: 20210729
 // -----------------------------------------------
 
 using System;
@@ -23,10 +23,10 @@ namespace Pony.Rest
 
         private readonly Dictionary<RestAction, string> _calls = new Dictionary<RestAction, string>
         {
-            {RestAction.CreateMaze, "maze"},
-            {RestAction.GetMazeState, "maze/{0}"},
-            {RestAction.NextMove, "maze/{0}"},
-            {RestAction.GetMaze, "maze/{0}/print"}
+            { RestAction.CreateMaze, "maze" },
+            { RestAction.GetMazeState, "maze/{0}" },
+            { RestAction.NextMove, "maze/{0}" },
+            { RestAction.GetMaze, "maze/{0}/print" }
         };
 
         private readonly RestAction _chosenAction;
@@ -35,10 +35,10 @@ namespace Pony.Rest
 
         private readonly Dictionary<RestAction, RequestType> _type = new Dictionary<RestAction, RequestType>
         {
-            {RestAction.CreateMaze, RequestType.POST},
-            {RestAction.GetMazeState, RequestType.GET},
-            {RestAction.NextMove, RequestType.POST},
-            {RestAction.GetMaze, RequestType.GET}
+            { RestAction.CreateMaze, RequestType.POST },
+            { RestAction.GetMazeState, RequestType.GET },
+            { RestAction.NextMove, RequestType.POST },
+            { RestAction.GetMaze, RequestType.GET }
         };
 
         private readonly Uri _urlStart = new Uri("https://ponychallenge.trustpilot.com/pony-challenge/");

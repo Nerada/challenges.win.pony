@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
 //      File: Pony.MainWindowViewModel.cs
-// Created on: 20201211
+// Created on: 20210729
 // -----------------------------------------------
 
 using System;
@@ -46,9 +46,9 @@ namespace Pony.ViewModels
 
         private readonly Dictionary<StatusType, Brush> _statusColor = new()
         {
-            {StatusType.Info, new SolidColorBrush(Colors.Black)},
-            {StatusType.Warning, new SolidColorBrush(Colors.DarkOrange)},
-            {StatusType.Error, new SolidColorBrush(Colors.Red)}
+            { StatusType.Info, new SolidColorBrush(Colors.Black) },
+            { StatusType.Warning, new SolidColorBrush(Colors.DarkOrange) },
+            { StatusType.Error, new SolidColorBrush(Colors.Red) }
         };
 
         #endregion Fields

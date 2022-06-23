@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
 //      File: Pony.RestRequestor.cs
-// Created on: 20201211
+// Created on: 20210729
 // -----------------------------------------------
 
 using System;
@@ -50,7 +50,7 @@ namespace Pony.Rest
         {
             if (string.IsNullOrEmpty(_mazeId)) throw new Exception("Create a maze first!");
 
-            var directionPayload = new JObject {{"direction", direction}};
+            var directionPayload = new JObject { { "direction", direction } };
 
             string response = RestHandler.Request(new RequestUrl(RequestUrl.RestAction.NextMove, _mazeId), directionPayload);
 
