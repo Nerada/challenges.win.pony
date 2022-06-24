@@ -4,7 +4,9 @@
 // Created on: 20201211
 // -----------------------------------------------
 
+using System;
 using System.Net;
+using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json.Linq;
 using Pony.Models;
@@ -28,11 +30,11 @@ namespace Pony.tests.Rest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidPlayerNameException))]
         public void TestInvalidName()
         {
             _params.PlayerName = "Wrong Name";
-            _restAnalyzer.CreateMaze(_params.ToJson());
+            Action action = () => _restAnalyzer.CreateMaze(_params.ToJson());
+            action.Should().Throw<InvalidPlayerNameException>();
         }
 
         [TestMethod]
@@ -40,26 +42,23 @@ namespace Pony.tests.Rest
         {
             string result = _restAnalyzer.CreateMaze(_params.ToJson());
 
-            Assert.IsNotNull(JObject.Parse(result)["maze_id"]);
+            JObject.Parse(result)["maze_id"].Should().NotBeNull();
         }
 
         [TestMethod]
-        [ExpectedException(typeof(WebException))]
         public void TestWrongMove()
         {
             _restAnalyzer.CreateMaze(_params.ToJson());
 
-            _restAnalyzer.Move("Wrong Direction");
+            Action action = () => _restAnalyzer.Move("Wrong Direction");
+            action.Should().Throw<WebException>();
         }
 
         [TestMethod]
         public void TestWalking()
         {
             _restAnalyzer.CreateMaze(_params.ToJson());
-
-            string moveResponse = _restAnalyzer.Move("north");
-
-            Assert.IsTrue(moveResponse == "Move accepted" || moveResponse == "Can't walk in there");
+            _restAnalyzer.Move("north").Should().BeOneOf("Move accepted", "Can't walk in there");
         }
     }
 }

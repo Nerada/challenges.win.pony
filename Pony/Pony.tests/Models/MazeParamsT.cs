@@ -7,6 +7,8 @@
 using Pony.Models;
 using Pony.Support;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using FluentAssertions;
 
 namespace Pony.tests.Models
 {
@@ -19,16 +21,25 @@ namespace Pony.tests.Models
         public void Initializer() => _mazeParams = new MazeParams();
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidInputException))]
-        public void TestInvalidWidth() => _mazeParams.Width = 10;
+        public void TestInvalidWidth()
+        {
+            Action action = () => _mazeParams.Width = 10;
+            action.Should().Throw<InvalidInputException>();
+        }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidInputException))]
-        public void TestInvalidHeight() => _mazeParams.Height = 10;
+        public void TestInvalidHeight()
+        {
+            Action action = () => _mazeParams.Height = 10;
+            action.Should().Throw<InvalidInputException>();
+        }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidInputException))]
-        public void TestInvalidDifficulty() => _mazeParams.Difficulty = 11;
+        public void TestInvalidDifficulty()
+        {
+            Action action = () => _mazeParams.Difficulty = 11;
+            action.Should().Throw<InvalidInputException>();
+        }
 
         [TestMethod]
         public void TestParamsValidation()
@@ -38,7 +49,7 @@ namespace Pony.tests.Models
             _mazeParams.Difficulty = 5;
             _mazeParams.PlayerName = MazeParams.GetRandomVerifiedPlayerName();
 
-            Assert.IsTrue(_mazeParams.IsValid());
+            _mazeParams.IsValid().Should().BeTrue();
         }
     }
 }

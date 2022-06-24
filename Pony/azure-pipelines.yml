@@ -9,13 +9,16 @@ trigger:
 
 pool:
   vmImage: 'windows-latest'
-
+  
+variables:
+  disable.coverage.autogenerate: 'true' # We overwrite the coverage report generation
+  
 resources:
   repositories:
     - repository: devops.pipelines
       type: github
       name: Nerada/devops.pipelines
-      endpoint: Nerada #Setup in Azure=>Project settings=>Service connections
+      endpoint: Nerada # Setup in Azure=>Project settings=>Service connections
 
 stages:
 - stage: rl0_stage
@@ -24,7 +27,4 @@ stages:
   - template: templates/main.yml@devops.pipelines
     parameters:
       solutionName: 'Pony'
-      buildPlatform: 'Any CPU'
-      buildConfiguration: 'Release'
-      buildFolderName: 'bin'
       version: '0.1.0.$(Build.BuildId)'

@@ -6,6 +6,7 @@
 
 using Pony.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using FluentAssertions;
 
 namespace Pony.tests.ViewModels
 {
@@ -21,30 +22,30 @@ namespace Pony.tests.ViewModels
         public void TestWidthValidation()
         {
             _mainWindowVm.MazeWidth = 10;
-            Assert.IsFalse(_mainWindowVm.ValidMazeWidth);
+            _mainWindowVm.ValidMazeWidth.Should().BeFalse();
 
             _mainWindowVm.MazeWidth = 20;
-            Assert.IsTrue(_mainWindowVm.ValidMazeWidth);
+            _mainWindowVm.ValidMazeWidth.Should().BeTrue();
         }
 
         [TestMethod]
         public void TestHeightValidation()
         {
             _mainWindowVm.MazeHeight = 10;
-            Assert.IsFalse(_mainWindowVm.ValidMazeHeight);
+            _mainWindowVm.ValidMazeHeight.Should().BeFalse();
 
             _mainWindowVm.MazeHeight = 20;
-            Assert.IsTrue(_mainWindowVm.ValidMazeHeight);
+            _mainWindowVm.ValidMazeHeight.Should().BeTrue();
         }
 
         [TestMethod]
         public void TestDifficultyValidation()
         {
             _mainWindowVm.MazeDifficulty = "11";
-            Assert.IsFalse(_mainWindowVm.ValidMazeDifficulty);
+            _mainWindowVm.ValidMazeDifficulty.Should().BeFalse();
 
             _mainWindowVm.MazeDifficulty = "5";
-            Assert.IsTrue(_mainWindowVm.ValidMazeDifficulty);
+            _mainWindowVm.ValidMazeDifficulty.Should().BeTrue();
         }
     }
 }
