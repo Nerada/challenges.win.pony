@@ -1,11 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <Authors>Ramon Bollen</Authors>
     <Company>RamBo</Company>
   </PropertyGroup>
+  
   <ItemGroup>
     <EmbeddedResource Update="Localization\zh-CN.resx">
       <SubType>Designer</SubType>
@@ -22,9 +24,12 @@
       <LastGenOutput>en-US.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  
   <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
+  
   <ItemGroup>
     <Compile Update="Localization\en-US.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -42,4 +47,18 @@
       <DependentUpon>zh-CN.resx</DependentUpon>
     </Compile>
   </ItemGroup>
+  
+  <Target Name="SetSourceRevisionId" BeforeTargets="BeforeResGen" Condition="'$(SourceRevisionId)' == ''"> 
+    <Message Importance="High" Text="Running meta data script" /> 
+    <PropertyGroup>
+      <ScriptLocation>https://raw.githubusercontent.com/Nerada/devops.pipelines/master/build-scripts/buildMetaData.ps1</ScriptLocation>
+    </PropertyGroup>
+
+    <Exec Command="powershell -NonInteractive -ExecutionPolicy Bypass Invoke-Command -ScriptBlock ([Scriptblock]::Create(((Invoke-WebRequest -Uri '$(ScriptLocation)' -UseBasicParsing).Content)))" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="SourceRevisionId" /> 
+    </Exec> 
+
+    <Message Importance="High" Text="SourceRevisionId set from project file to: $(SourceRevisionId)" /> 
+  </Target>
+  
 </Project>
