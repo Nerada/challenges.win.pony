@@ -9,46 +9,45 @@ using System.Globalization;
 using System.Reflection;
 using System.Resources;
 
-namespace Pony.Localization
+namespace Pony.Localization;
+
+/// <summary>
+///     Class for handling languages
+/// </summary>
+public static class LocalizationHandler
 {
-    /// <summary>
-    ///     Class for handling languages
-    /// </summary>
-    public static class LocalizationHandler
+    private static CultureInfo _cul;
+
+    private static ResourceManager _resMrg;
+
+    public enum Language
     {
-        public enum Language
-        {
-            English,
-            Dutch,
-            Chinese
-        }
+        English,
+        Dutch,
+        Chinese
+    }
 
-        private static string          _dictionaryName;
-        private static ResourceManager _resMrg;
-        private static CultureInfo     _cul;
+    static LocalizationHandler()
+    {
+        SetLanguage(Language.English);
+    }
 
-        static LocalizationHandler()
-        {
-            SetLanguage(Language.English);
-        }
+    public static Dictionary<Language, string> Languages { get; } = new()
+    {
+        {Language.English, "en-US"}, {Language.Dutch, "nl-NL"}, {Language.Chinese, "zh-cn"}
+    };
 
-        public static Dictionary<Language, string> Languages { get; } = new()
-        {
-            {Language.English, "en-US"}, {Language.Dutch, "nl-NL"}, {Language.Chinese, "zh-cn"}
-        };
+    /// <summary>
+    ///     Get a specific resource string for the current language
+    /// </summary>
+    /// <param name="resName"></param>
+    /// <returns></returns>
+    public static string GetString(string resName) => _resMrg.GetString(resName, _cul);
 
-        /// <summary>
-        ///     Get a specific resource string for the current language
-        /// </summary>
-        /// <param name="resName"></param>
-        /// <returns></returns>
-        public static string GetString(string resName) => _resMrg.GetString(resName, _cul);
-
-        public static void SetLanguage(Language lang)
-        {
-            _dictionaryName = $"{Assembly.GetExecutingAssembly().GetName().Name}.Localization.{Languages[lang]}";
-            _resMrg         = new ResourceManager(_dictionaryName, Assembly.GetExecutingAssembly());
-            _cul            = new CultureInfo(Languages[lang]);
-        }
+    public static void SetLanguage(Language lang)
+    {
+        string dictionaryName = $"{Assembly.GetExecutingAssembly().GetName().Name}.Localization.{Languages[lang]}";
+        _resMrg = new ResourceManager(dictionaryName, Assembly.GetExecutingAssembly());
+        _cul    = new CultureInfo(Languages[lang]);
     }
 }
