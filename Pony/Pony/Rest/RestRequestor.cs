@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
 //      File: Pony.RestRequestor.cs
-// Created on: 20210729
+// Created on: 20221119
 // -----------------------------------------------
 
 using System;
@@ -63,11 +63,11 @@ public class RestRequestor
         {
             string state = JObject.Parse(response).SelectToken("state")?.ToString();
 
-            if (state == "won" || state == "over")
+            if (state is "won" or "over")
             {
                 string hiddenUrl = JObject.Parse(response).SelectToken("hidden-url")?.ToString();
 
-                if (!(hiddenUrl is { } url)) return null;
+                if (hiddenUrl is not { } url) return null;
 
                 string fileName = url.Substring(0, url.LastIndexOf('.'))
                                      .Replace(@"/", "", StringComparison.InvariantCulture);

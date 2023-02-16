@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
 //      File: Pony.RestHandler.cs
-// Created on: 20210729
+// Created on: 20221119
 // -----------------------------------------------
 
 using System;
@@ -58,7 +58,7 @@ public static class RestHandler
         return request;
     }
 
-    private static string Request(HttpWebRequest request)
+    private static string Request(WebRequest request)
     {
         string response = string.Empty;
 
@@ -77,7 +77,7 @@ public static class RestHandler
         {
             if (e.InnerException?.Message == "No such host is known.") throw new WebException("Cannot connect to remote host.");
 
-            if (!(e.Response is { } exResponse)) return null;
+            if (e.Response is not { } exResponse) return null;
 
             StreamReader resp              = new(exResponse.GetResponseStream() ?? throw new InvalidOperationException());
             string       messageFromServer = resp.ReadToEnd();

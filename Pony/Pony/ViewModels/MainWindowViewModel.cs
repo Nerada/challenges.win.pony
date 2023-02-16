@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
 //      File: Pony.MainWindowViewModel.cs
-// Created on: 20210729
+// Created on: 20221119
 // -----------------------------------------------
 
 using System;
@@ -209,6 +209,7 @@ public class MainWindowViewModel : INotifyPropertyChanged
 
     private bool CanExecuteWalk { get; set; }
 
+    // ReSharper disable once UnusedMember.Global
     public ICommand ChangeLanguageCommand => _changeLanguageCommand ??= new CommandHandler(ChangeLanguageCmd, () => CanExecuteChangeLanguage);
 
     private bool CanExecuteChangeLanguage { get; } = true;
@@ -302,6 +303,7 @@ public class MainWindowViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler PropertyChanged;
 
+    // ReSharper disable once MemberCanBePrivate.Global
     protected void OnPropertyChange(string propertyName) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     #endregion Events

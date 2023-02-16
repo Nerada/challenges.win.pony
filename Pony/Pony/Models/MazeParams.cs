@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
 //      File: Pony.MazeParams.cs
-// Created on: 20210729
+// Created on: 20221119
 // -----------------------------------------------
 
 using System;
@@ -31,7 +31,7 @@ public class MazeParams
     // Without google I wouldn't have guessed any of them.
     // There could be more so lets use this list for random default names.
     // Too bad there is no "get valid name list" call to tbe API.
-    public static List<string> ConfirmedNames =>
+    private static List<string> ConfirmedNames =>
         new()
         {
             // ReSharper disable StringLiteralTypo
@@ -106,9 +106,9 @@ public class MazeParams
         return true;
     }
 
-    private static bool IsValidSize(int size) => size >= 15 && size <= 25;
+    private static bool IsValidSize(int size) => size is >= 15 and <= 25;
 
-    private static bool IsValidDifficulty(int? dif) => dif == null || (dif >= 0 && dif <= 10);
+    private static bool IsValidDifficulty(int? dif) => dif is null or >= 0 and <= 10;
 
     public JObject ToJson()
     {

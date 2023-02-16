@@ -13,7 +13,7 @@
     <DockPanel>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem>
-                <TextBox Name="LblStatus" Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"
+                <TextBox Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"
                          Foreground="{Binding StatusColor, UpdateSourceTrigger=PropertyChanged}"
                          Background="Transparent" FontWeight="Bold" IsReadOnly="True" BorderThickness="0" />
             </StatusBarItem>
@@ -132,7 +132,7 @@
                 </TextBox>
             </l:LimitChild>
 
-            <TextBlock x:Name="TxtMaze" Grid.Row="0" Grid.Column="6" Grid.RowSpan="6" Background="LightSalmon"
+            <TextBlock Grid.Row="0" Grid.Column="6" Grid.RowSpan="6" Background="LightSalmon"
                        Text="{Binding MazeStatus, UpdateSourceTrigger=PropertyChanged}" FontFamily="Courier New">
                 <TextBlock.InputBindings>
                     <KeyBinding Key="Up" Command="{Binding WalkCommand}" CommandParameter="north" />

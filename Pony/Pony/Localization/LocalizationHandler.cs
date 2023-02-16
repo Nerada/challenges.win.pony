@@ -1,7 +1,7 @@
 ﻿// -----------------------------------------------
 //     Author: Ramon Bollen
 //      File: Pony.LocalizationHandler.cs
-// Created on: 20210729
+// Created on: 20221119
 // -----------------------------------------------
 
 using System.Collections.Generic;
@@ -32,6 +32,7 @@ public static class LocalizationHandler
         SetLanguage(Language.English);
     }
 
+    // ReSharper disable once MemberCanBePrivate.Global
     public static Dictionary<Language, string> Languages { get; } = new()
     {
         {Language.English, "en-US"}, {Language.Dutch, "nl-NL"}, {Language.Chinese, "zh-cn"}
@@ -40,8 +41,6 @@ public static class LocalizationHandler
     /// <summary>
     ///     Get a specific resource string for the current language
     /// </summary>
-    /// <param name="resName"></param>
-    /// <returns></returns>
     public static string GetString(string resName) => _resMrg.GetString(resName, _cul);
 
     public static void SetLanguage(Language lang)
