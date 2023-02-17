@@ -6,7 +6,12 @@
 version: 2
 updates:
   - package-ecosystem: nuget
-    directory: "/"
+    directory: "/Pony/Pony"
     schedule:
       interval: weekly
-    open-pull-requests-limit: 5
+    rebase-strategy: auto
+  - package-ecosystem: nuget
+    directory: "/Pony/Pony.tests"
+    schedule:
+      interval: weekly
+    rebase-strategy: auto
